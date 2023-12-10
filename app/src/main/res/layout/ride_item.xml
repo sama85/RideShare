@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="10dp"
+    android:background="#3EFAC6C6"
+    android:layout_marginBottom="20dp">
+
+    <ImageView
+        android:id="@+id/driver_img"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="30dp"
+        android:src="@drawable/profile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/driver_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:textSize="@dimen/small_text_size_rv"
+        android:maxLength="20"
+        android:text="Ahmed Samy"
+        android:layout_marginStart="5dp"
+        app:layout_constraintEnd_toEndOf="@id/driver_img"
+        app:layout_constraintStart_toStartOf="@id/driver_img"
+        app:layout_constraintTop_toBottomOf="@id/driver_img" />
+
+    <TextView
+        android:id="@+id/from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:text="@string/from"
+        android:textSize="@dimen/large_text_size_rv"
+        app:layout_constraintStart_toEndOf="@id/driver_img"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/source"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="Abasseya Sqauare"
+        android:textSize="@dimen/large_text_size_rv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/from"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/to"
+        android:textSize="@dimen/large_text_size_rv"
+        app:layout_constraintStart_toStartOf="@id/from"
+        app:layout_constraintTop_toBottomOf="@id/from" />
+
+    <TextView
+        android:id="@+id/destination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ain Shams University"
+        android:textSize="@dimen/large_text_size_rv"
+        app:layout_constraintEnd_toEndOf="@+id/source"
+        app:layout_constraintStart_toStartOf="@id/source"
+        app:layout_constraintTop_toTopOf="@id/to" />
+
+
+    <TextView
+        android:id="@+id/cost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/cost"
+        android:textSize="@dimen/large_text_size_rv"
+        app:layout_constraintStart_toStartOf="@id/to"
+        app:layout_constraintTop_toBottomOf="@id/to" />
+
+    <TextView
+        android:id="@+id/cost_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="200 EGP"
+        android:textSize="@dimen/large_text_size_rv"
+        app:layout_constraintEnd_toEndOf="@+id/destination"
+        app:layout_constraintStart_toStartOf="@+id/destination"
+        app:layout_constraintTop_toTopOf="@id/cost" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:drawablePadding="5dp"
+        android:text="Tuseday-Nov 10"
+        android:textSize="@dimen/small_text_size_rv"
+        app:drawableStartCompat="@drawable/calendar"
+        app:layout_constraintEnd_toStartOf="@+id/time"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/driver_name" />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="5dp"
+        android:text="Depart at: 7:30 am"
+        android:textSize="@dimen/small_text_size_rv"
+        app:drawableStartCompat="@drawable/calendar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/date"
+        app:layout_constraintTop_toTopOf="@id/date" />
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:backgroundTint="@color/main"
+        android:text="@string/book_ride"
+        android:textSize="@dimen/large_text_size_rv"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/date" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

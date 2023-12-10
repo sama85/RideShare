@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rides_history_nav_graph"
+    app:startDestination="@id/historyListFragment">
+
+    <fragment
+        android:id="@+id/historyListFragment"
+        android:name="com.example.rideshare.HistoryListFragment"
+        android:label="HistoryListFragment" >
+        <action
+            android:id="@+id/action_historyListFragment_to_historyDetailFragment"
+            app:destination="@id/historyDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/historyDetailFragment"
+        android:name="com.example.rideshare.HistoryDetailFragment"
+        android:label="HistoryDetailFragment" >
+        <action
+            android:id="@+id/action_historyDetailFragment_to_historyListFragment"
+            app:destination="@id/historyListFragment" />
+    </fragment>
+</navigation>

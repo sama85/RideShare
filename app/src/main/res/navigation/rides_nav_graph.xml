@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/rides_nav_graph"
+    app:startDestination="@id/ridesListFragment">
+
+    <fragment
+        android:id="@+id/ridesListFragment"
+        android:name="com.example.rideshare.view.RidesListFragment"
+        android:label="RidesListFragment" >
+        <action
+            android:id="@+id/action_ridesListFragment_to_rideDetailsFragment"
+            app:destination="@id/rideDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/requestRideFragment"
+        android:name="com.example.rideshare.view.RequestRideFragment"
+        android:label="RequestRideFragment" >
+        <action
+            android:id="@+id/action_requestRideFragment_to_ridesListFragment"
+            app:destination="@id/ridesListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rideDetailsFragment"
+        android:name="com.example.rideshare.view.RideDetailsFragment"
+        android:label="RideDetailsFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.rideshare.view.profileFragment"
+        android:label="profileFragment" />
+</navigation>

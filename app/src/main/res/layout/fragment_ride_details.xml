@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/gradient_bg"
+    android:padding="20dp">
+
+    <!-- Driver & Trip Details Section -->
+
+    <ImageView
+        android:id="@+id/driver_img_trip"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/driver_name_trip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/small_margin"
+        android:text="Ahmed Samy"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/driver_img_trip"
+        app:layout_constraintStart_toStartOf="@+id/driver_img_trip"
+        app:layout_constraintTop_toBottomOf="@+id/driver_img_trip" />
+
+
+    <TextView
+        android:id="@+id/from_trip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="40dp"
+        android:text="From: "
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/large_text_size"
+        android:textStyle="bold"
+        android:layout_marginStart="60dp"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/driver_name_trip" />
+
+    <!-- Radio Buttons for Payment Methods -->
+    <TextView
+        android:id="@+id/source_trip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Abasseya square"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/large_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/from_trip"
+        app:layout_constraintTop_toTopOf="@+id/from_trip" />
+
+    <TextView
+        android:id="@+id/to_trip"
+        android:layout_width="31dp"
+        android:layout_height="22dp"
+        android:layout_marginTop="@dimen/small_margin"
+        android:text="To: "
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/large_text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/from_trip"
+        app:layout_constraintStart_toStartOf="@+id/from_trip"
+        app:layout_constraintTop_toBottomOf="@+id/from_trip" />
+
+    <TextView
+        android:id="@+id/destination_trip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Ain Shams University"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/large_text_size"
+        app:layout_constraintEnd_toEndOf="@+id/source_trip"
+        app:layout_constraintStart_toStartOf="@+id/source_trip"
+        app:layout_constraintTop_toTopOf="@+id/to_trip" />
+
+    <TextView
+        android:id="@+id/cost_trip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        android:text="Cost: "
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/large_text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/to_trip"
+        app:layout_constraintStart_toStartOf="@+id/to_trip"
+        app:layout_constraintTop_toBottomOf="@+id/to_trip" />
+
+    <TextView
+        android:id="@+id/cost_value_trip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="200 EGP"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/large_text_size"
+        app:layout_constraintEnd_toEndOf="@+id/destination_trip"
+        app:layout_constraintStart_toStartOf="@+id/destination_trip"
+        app:layout_constraintTop_toTopOf="@+id/cost_trip" />
+
+    <TextView
+        android:id="@+id/vehicle_no"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        android:text="Vehicle Register No:"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/large_text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/cost_trip"
+        app:layout_constraintStart_toStartOf="@+id/cost_trip"
+        app:layout_constraintTop_toBottomOf="@+id/cost_trip" />
+
+    <TextView
+        android:id="@+id/vehicle_no_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="A12345"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/large_text_size"
+        app:layout_constraintEnd_toEndOf="@+id/cost_value_trip"
+        app:layout_constraintStart_toStartOf="@+id/cost_value_trip"
+        app:layout_constraintTop_toTopOf="@+id/vehicle_no" />
+
+    <TextView
+        android:id="@+id/vehicle_model"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/small_margin"
+        android:text="Vehicle Model: "
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/large_text_size"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/vehicle_no"
+        app:layout_constraintStart_toStartOf="@+id/vehicle_no"
+        app:layout_constraintTop_toBottomOf="@+id/vehicle_no" />
+
+    <TextView
+        android:id="@+id/vehicle_model_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BYD - Black"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/large_text_size"
+        app:layout_constraintEnd_toEndOf="@+id/vehicle_no_value"
+        app:layout_constraintStart_toStartOf="@+id/vehicle_no_value"
+        app:layout_constraintTop_toTopOf="@+id/vehicle_model" />
+
+    <TextView
+        android:id="@+id/payment_method"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="Select Payment Method:"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/large_text_size"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vehicle_model" />
+
+    <!-- Button for Proceeding to Payment -->
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="116dp"
+        android:layout_height="95dp"
+        android:layout_marginTop="@dimen/small_margin"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/payment_method">
+
+        <RadioButton
+            android:id="@+id/radio_btn_credit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Credit Card"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="60dp"
+            tools:layout_editor_absoluteY="442dp" />
+
+        <RadioButton
+            android:id="@+id/radio_btn_cash"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cash"
+            android:textColor="@android:color/black"
+            android:textSize="16sp"
+            tools:layout_editor_absoluteX="60dp"
+            tools:layout_editor_absoluteY="394dp" />
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/buttonProceedToPayment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:backgroundTint="@color/main"
+        android:text="Proceed to Payment"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        tools:layout_editor_absoluteX="20dp" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
