@@ -40,14 +40,6 @@ public class RiderActivity extends AppCompatActivity {
         navHost = (NavHost) getSupportFragmentManager().findFragmentById(R.id.main_frame);
         navController = navHost.getNavController();
         setupWithNavController(binding.bottomNavBar, navController);
-
-        binding.signOutBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAuth.signOut();
-                navigateToSignIn();
-            }
-        });
     }
     void checkAuth(){
         if (user == null)

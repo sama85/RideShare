@@ -10,13 +10,16 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.rideshare.R;
+import com.example.rideshare.databinding.FragmentRideDetailsBinding;
 
 public class RideDetailsFragment extends Fragment {
+
+    FragmentRideDetailsBinding binding;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.fragment_ride_details, container, false);
-        //initialize view inside fragment
+        binding = FragmentRideDetailsBinding.inflate(inflater, container, false);
+        return binding.getRoot();
     }
 }

@@ -2,7 +2,7 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/rides_nav_graph"
-    app:startDestination="@id/ridesListFragment">
+    app:startDestination="@id/requestRideFragment">
 
     <fragment
         android:id="@+id/ridesListFragment"

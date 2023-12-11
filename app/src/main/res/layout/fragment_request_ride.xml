@@ -23,28 +23,39 @@
 
     <ImageView
         android:id="@+id/request_car"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginTop="20dp"
         android:src="@drawable/ic_family_car"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/book_ride"/>
 
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/source_et"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="30dp"
         android:hint="Enter your Source"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/request_car" />
+        app:layout_constraintTop_toBottomOf="@+id/request_car">
 
-    <EditText
+        <AutoCompleteTextView
+            android:id="@+id/auto_comp_source"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/destination_et"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -53,24 +64,47 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/source_et" />
+        app:layout_constraintTop_toBottomOf="@+id/source_et">
 
-<!--    TODO: attach date picker when clicked-->
-    <EditText
-        android:id="@+id/date_et"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:hint="Select Date"
-        android:inputType="date"
-        android:minHeight="48dp"
+        <AutoCompleteTextView
+            android:id="@+id/auto_comp_dest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/date_card"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="#00958E8E"
+        app:cardCornerRadius="0dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/destination_et" />
+        app:layout_constraintTop_toBottomOf="@id/destination_et"
+        app:strokeColor="#C1000000"
+        app:strokeWidth="1dp">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/date_btn"
+            style="?android:spinnerStyle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="JAN 01 2020"
+            android:textColor="#A4000000"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/destination_et" />
+    </com.google.android.material.card.MaterialCardView>
+
 
     <!--    TODO: attach time picker when clicked-->
-    <EditText
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/time_et"
+        style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -79,11 +113,18 @@
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/date_et" />
+        app:layout_constraintTop_toBottomOf="@id/date_card">
+
+        <AutoCompleteTextView
+            android:id="@+id/auto_comp_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="none" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/search_btn"
-        android:layout_width="300dp"
+        android:layout_width="@dimen/btn_width"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:backgroundTint="@color/main"
@@ -92,5 +133,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/time_et"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/rides_btn"
+        android:layout_width="@dimen/btn_width"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:backgroundTint="@color/main"
+        android:text="Show all rides"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_btn"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

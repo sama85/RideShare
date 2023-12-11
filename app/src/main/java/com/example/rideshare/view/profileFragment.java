@@ -1,65 +1,94 @@
 package com.example.rideshare.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.rideshare.R;
+import com.example.rideshare.databinding.FragmentProfileBinding;
+import com.example.rideshare.databinding.FragmentRideDetailsBinding;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link profileFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class profileFragment extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public profileFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment profileFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static profileFragment newInstance(String param1, String param2) {
-        profileFragment fragment = new profileFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    FragmentProfileBinding binding;
+    private boolean isEditMode;
+    FirebaseAuth mAuth;
+    FirebaseUser user;
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        super.onCreateView(inflater, container, savedInstanceState);
+        binding = FragmentProfileBinding.inflate(inflater, container, false);
+        return binding.getRoot();
+    }
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        setEditMode(false);
+        mAuth = FirebaseAuth.getInstance();
+        user = mAuth.getCurrentUser();
+
+        binding.btnSignout.setOnClickListener(v -> {
+            mAuth.signOut();
+            navigateToSignIn();
+        });
+
+        // Toggle edit mode when the Edit button is clicked
+        binding.editBtn.setOnClickListener(v -> {
+            isEditMode = !isEditMode;
+            setEditMode(isEditMode);
+        });
+
+        // Handle save action
+        binding.saveBtn.setOnClickListener(v -> {
+            // Save changes and perform necessary actions
+            // For example, update user profile data
+            setEditMode(false); // Set back to display mode
+        });
+
+        // Handle cancel action
+        binding.cancelBtn.setOnClickListener(v -> {
+            // Discard changes and revert to display mode
+            setEditMode(false);
+            // Reset EditText fields with original values if needed
+        });
+    }
+
+    // Method to toggle between display and edit modes
+    private void setEditMode(boolean enabled) {
+        if (enabled) {
+            binding.nameEt.setVisibility(View.VISIBLE);
+            binding.emailEt.setVisibility(View.VISIBLE);
+            binding.phoneEt.setVisibility(View.VISIBLE);
+            binding.name.setVisibility(View.GONE);
+            binding.email.setVisibility(View.GONE);
+            binding.phone.setVisibility(View.GONE);
+            binding.editBtn.setVisibility(View.GONE);
+            binding.saveBtn.setVisibility(View.VISIBLE);
+            binding.cancelBtn.setVisibility(View.VISIBLE);
+        } else {
+            binding.nameEt.setVisibility(View.GONE);
+            binding.emailEt.setVisibility(View.GONE);
+            binding.phoneEt.setVisibility(View.GONE);
+            binding.name.setVisibility(View.VISIBLE);
+            binding.email.setVisibility(View.VISIBLE);
+            binding.phone.setVisibility(View.VISIBLE);
+            binding.editBtn.setVisibility(View.VISIBLE);
+            binding.saveBtn.setVisibility(View.GONE);
+            binding.cancelBtn.setVisibility(View.GONE);
         }
     }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+    void navigateToSignIn(){
+        Intent intent  = new Intent(getActivity(), SignInActivity.class);
+        startActivity(intent);
+        requireActivity().finish();
     }
+
 }

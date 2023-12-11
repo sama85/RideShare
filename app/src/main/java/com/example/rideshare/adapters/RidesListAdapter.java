@@ -17,9 +17,6 @@ import java.util.List;
 
 public class RidesListAdapter extends RecyclerView.Adapter<RidesListAdapter.RideViewHolder>{
     List<Ride> rides;
-    public RidesListAdapter(List<Ride> rides) {
-        this.rides = rides;
-    }
 
     @NonNull
     @Override
@@ -37,6 +34,12 @@ public class RidesListAdapter extends RecyclerView.Adapter<RidesListAdapter.Ride
     @Override
     public int getItemCount() {
         return rides.size();
+    }
+
+    public void updateRides(List<Ride> rides){
+        this.rides = rides;
+        // to redraw recycler view
+        notifyDataSetChanged();
     }
 
     public class RideViewHolder extends RecyclerView.ViewHolder{

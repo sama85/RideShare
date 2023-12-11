@@ -15,19 +15,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/sign_out_btn"
-        app:navGraph="@navigation/rides_nav_graph"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/sign_out_btn"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:backgroundTint="@color/main"
-        android:text="Signout"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav_bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:navGraph="@navigation/rides_nav_graph"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_bar"
