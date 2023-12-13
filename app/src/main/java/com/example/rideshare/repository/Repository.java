@@ -11,19 +11,22 @@ import com.example.rideshare.room.UserDao;
 import com.example.rideshare.room.UserDatabase;
 import com.example.rideshare.view.RiderActivity;
 
+import javax.security.auth.callback.Callback;
+
 public class Repository {
     private UserDao userDao;
-    LiveData<User> user;
+//    LiveData<User> user = new LiveData<User>() {
+//    };
 
     public Repository(Application application){
         UserDatabase userDB = UserDatabase.getInstance(application);
         this.userDao = userDB.userDao();
-        user = userDao.getUser(RiderActivity.getUserEmail());
+       // user = userDao.getUser(RiderActivity.getUserEmail());
     }
 
     /** Room runs db operations that return livedata on a bg thread by default */
-    public LiveData<User> getUser(){
-        return user;
+    public LiveData<User> getUser(String email){
+      return userDao.getUser(email);
     }
 
     public void insert(User user){

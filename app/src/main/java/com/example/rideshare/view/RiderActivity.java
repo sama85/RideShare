@@ -32,15 +32,12 @@ public class RiderActivity extends AppCompatActivity {
         binding = ActivityRiderMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        userEmail = getIntent().getStringExtra("userEmail");
         mAuth = FirebaseAuth.getInstance();
         user = mAuth.getCurrentUser();
         checkAuth();
         navHost = (NavHost) getSupportFragmentManager().findFragmentById(R.id.main_frame);
         navController = navHost.getNavController();
         setupWithNavController(binding.bottomNavBar, navController);
-        //Repository rep = new Repository(getApplication());
-        //rep.setUpUser("sama@google.com");
     }
     void checkAuth(){
         if (user == null)

@@ -2,6 +2,7 @@ package com.example.rideshare.viewModels;
 
 import android.app.Application;
 import android.content.Intent;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -23,9 +24,11 @@ public class ProfileViewModel extends AndroidViewModel{
     public ProfileViewModel(@NonNull Application application) {
         super(application);
         repository = new Repository(application);
-        user = repository.getUser();
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
+
+        Log.i("profile", "email :" + firebaseUser.getEmail());
+        user = repository.getUser(firebaseUser.getEmail());
         isEditMode.setValue(false);
     }
     public LiveData<User> getUser() {

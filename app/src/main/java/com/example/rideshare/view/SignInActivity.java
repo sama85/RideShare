@@ -51,7 +51,7 @@ public class SignInActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Toast.makeText(SignInActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                                    loadMainPage(email);
+                                    loadMainPage();
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Toast.makeText(SignInActivity.this, "Authentication Failed!", Toast.LENGTH_SHORT).show();
@@ -68,13 +68,12 @@ public class SignInActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            loadMainPage(currentUser.getEmail());
+            loadMainPage();
         }
     }
 
-    void loadMainPage(String email){
+    void loadMainPage(){
         Intent intent = new Intent(SignInActivity.this, RiderActivity.class);
-        intent.putExtra("userEmail", email);
         startActivity(intent);
         finish();
     }

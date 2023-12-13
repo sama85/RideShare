@@ -30,7 +30,6 @@ public class SignUpActivity extends AppCompatActivity {
                 if(email != null){
                     Toast.makeText(getApplicationContext(), "Account Created!",Toast.LENGTH_SHORT).show();
                     Intent intent  = new Intent(SignUpActivity.this, RiderActivity.class);
-                    intent.putExtra("userEmail", email);
                     startActivity(intent);
                     finish();
                 }
