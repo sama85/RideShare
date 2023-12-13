@@ -5,8 +5,7 @@
     <string name="sign_in">Sign In</string>
     <string name="acc_text">Don\'t Have an account?</string>
     <string name="sign_up">Sign Up</string>
-    <string name="hint_first_name">First Name</string>
-    <string name="hint_last_name">Last Name</string>
+    <string name="hint_name">Name</string>
     <string name="from">From:</string>
     <string name="to">To:</string>
     <string name="select_date">Select a Date</string>

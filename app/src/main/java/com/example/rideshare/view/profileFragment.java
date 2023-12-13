@@ -9,18 +9,21 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.rideshare.R;
 import com.example.rideshare.databinding.FragmentProfileBinding;
 import com.example.rideshare.databinding.FragmentRideDetailsBinding;
+import com.example.rideshare.room.User;
+import com.example.rideshare.viewModels.ProfileViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class profileFragment extends Fragment {
-    FragmentProfileBinding binding;
-    private boolean isEditMode;
-    FirebaseAuth mAuth;
-    FirebaseUser user;
+    private FragmentProfileBinding binding;
+    private ProfileViewModel viewModel;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -32,32 +35,38 @@ public class profileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setEditMode(false);
-        mAuth = FirebaseAuth.getInstance();
-        user = mAuth.getCurrentUser();
 
+        viewModel = new ViewModelProvider(this).get(ProfileViewModel.class);
+        viewModel.getUser().observe(getViewLifecycleOwner(), new Observer<User>() {
+            @Override
+            public void onChanged(User user) {
+                if(user != null)
+                    updateProfileData(user);
+            }
+        });
+
+        viewModel.isEditMode.observe(getViewLifecycleOwner(), new Observer<Boolean>() {
+            @Override
+            public void onChanged(Boolean editMode) {
+                setEditMode(editMode);
+            }
+        });
         binding.btnSignout.setOnClickListener(v -> {
-            mAuth.signOut();
-            navigateToSignIn();
+           viewModel.handle_signout();
+           navigateToSignIn();
         });
 
-        // Toggle edit mode when the Edit button is clicked
         binding.editBtn.setOnClickListener(v -> {
-            isEditMode = !isEditMode;
-            setEditMode(isEditMode);
+            viewModel.handle_edit_click();
         });
 
-        // Handle save action
         binding.saveBtn.setOnClickListener(v -> {
-            // Save changes and perform necessary actions
-            // For example, update user profile data
-            setEditMode(false); // Set back to display mode
+            viewModel.handle_save_click();
         });
 
         // Handle cancel action
         binding.cancelBtn.setOnClickListener(v -> {
-            // Discard changes and revert to display mode
-            setEditMode(false);
-            // Reset EditText fields with original values if needed
+            viewModel.handle_cancel_click();
         });
     }
 
@@ -84,6 +93,12 @@ public class profileFragment extends Fragment {
             binding.saveBtn.setVisibility(View.GONE);
             binding.cancelBtn.setVisibility(View.GONE);
         }
+    }
+
+    private void updateProfileData(User user){
+        binding.name.setText(user.getName());
+        binding.email.setText(user.getEmail());
+        binding.phone.setText(user.getPhone());
     }
     void navigateToSignIn(){
         Intent intent  = new Intent(getActivity(), SignInActivity.class);

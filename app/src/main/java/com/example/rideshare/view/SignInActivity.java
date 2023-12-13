@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.rideshare.databinding.ActivitySignInBinding;
+import com.example.rideshare.repository.Repository;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -25,7 +26,7 @@ public class SignInActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if (currentUser != null) {
-            loadMainPage();
+            loadMainPage(currentUser.getEmail());
         }
     }
 
@@ -43,7 +44,7 @@ public class SignInActivity extends AppCompatActivity {
         binding.signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email, password;
+                String email, password, name, phone;
                 email = binding.email.getText().toString();
                 password = binding.password.getText().toString();
 
@@ -59,7 +60,7 @@ public class SignInActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     // Sign in success, update UI with the signed-in user's information
                                     Toast.makeText(SignInActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                                    loadMainPage();
+                                    loadMainPage(email);
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Toast.makeText(SignInActivity.this, "Authentication Failed!", Toast.LENGTH_SHORT).show();
@@ -70,8 +71,9 @@ public class SignInActivity extends AppCompatActivity {
         });
     }
 
-    void loadMainPage(){
+    void loadMainPage(String email){
         Intent intent = new Intent(SignInActivity.this, RiderActivity.class);
+        intent.putExtra("userEmail", email);
         startActivity(intent);
         finish();
     }
