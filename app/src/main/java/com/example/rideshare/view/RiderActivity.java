@@ -45,6 +45,7 @@ public class RiderActivity extends AppCompatActivity {
     void checkAuth(){
         if (user == null)
             navigateToSignIn();
+        else userEmail = user.getEmail();
     }
     void navigateToSignIn(){
         Intent intent  = new Intent(RiderActivity.this, SignInActivity.class);

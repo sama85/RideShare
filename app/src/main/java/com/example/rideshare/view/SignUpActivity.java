@@ -5,17 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.rideshare.databinding.ActivitySignUpBinding;
 import com.example.rideshare.viewModels.SignUpViewModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
 public class SignUpActivity extends AppCompatActivity {
     ActivitySignUpBinding binding;
@@ -29,12 +24,13 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         viewModel = new ViewModelProvider(this).get(SignUpViewModel.class);
 
-        viewModel.signUpSuccess.observe(this, new Observer<Boolean>() {
+        viewModel.signUpEmail.observe(this, new Observer<String>() {
             @Override
-            public void onChanged(Boolean success) {
-                if(success){
+            public void onChanged(String email) {
+                if(email != null){
                     Toast.makeText(getApplicationContext(), "Account Created!",Toast.LENGTH_SHORT).show();
                     Intent intent  = new Intent(SignUpActivity.this, RiderActivity.class);
+                    intent.putExtra("userEmail", email);
                     startActivity(intent);
                     finish();
                 }

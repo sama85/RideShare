@@ -13,7 +13,7 @@ import com.example.rideshare.view.RiderActivity;
 
 public class Repository {
     private UserDao userDao;
-    LiveData<User> user = new MutableLiveData<>();
+    LiveData<User> user;
 
     public Repository(Application application){
         UserDatabase userDB = UserDatabase.getInstance(application);
@@ -25,12 +25,6 @@ public class Repository {
     public LiveData<User> getUser(){
         return user;
     }
-
-//    public void setUpUser(String email){
-//        UserDatabase.databaseWriteExecutor.execute(() -> {
-//            user.postValue(userDao.getUser(email).getValue());
-//        });
-//    }
 
     public void insert(User user){
         UserDatabase.databaseWriteExecutor.execute(() -> {

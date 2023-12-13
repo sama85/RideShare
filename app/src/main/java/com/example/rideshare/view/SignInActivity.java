@@ -21,20 +21,11 @@ public class SignInActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
 
     @Override
-    public void onStart() {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            loadMainPage(currentUser.getEmail());
-        }
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivitySignInBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
         mAuth = FirebaseAuth.getInstance();
         binding.signUpBtn.setOnClickListener((View view) -> {
             Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
@@ -69,6 +60,16 @@ public class SignInActivity extends AppCompatActivity {
                         });
             }
         });
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if (currentUser != null) {
+            loadMainPage(currentUser.getEmail());
+        }
     }
 
     void loadMainPage(String email){
