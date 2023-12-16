@@ -1,6 +1,7 @@
 package com.example.rideshare.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class RidesListAdapter extends RecyclerView.Adapter<RidesListAdapter.Ride
 
     public void updateRides(List<Ride> rides){
         this.rides = rides;
+        Log.i("ride", "update ride called");
         // to redraw recycler view
         notifyDataSetChanged();
     }
@@ -49,9 +51,9 @@ public class RidesListAdapter extends RecyclerView.Adapter<RidesListAdapter.Ride
             this.binding = binding;
         }
         public void bind(Ride rideItem){
-            binding.driverName.setText(rideItem.getDriverName());
-            binding.source.setText(rideItem.getSource());
-            binding.destination.setText(rideItem.getDestination());
+            binding.driverName.setText("dummy name");
+            binding.source.setText(rideItem.getSrc());
+            binding.destination.setText(rideItem.getDest());
             binding.date.setText(rideItem.getDate());
             binding.time.setText(rideItem.getTime());
             binding.costValue.setText(String.valueOf(rideItem.getCost()));

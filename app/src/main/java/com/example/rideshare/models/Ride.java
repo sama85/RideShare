@@ -1,44 +1,40 @@
 package com.example.rideshare.models;
 
 public class Ride {
-    String driverName;
-    String source;
-    String destination;
+    String src;
+    String dest;
     String date;
     String time;
-    double cost;
+    String driverId;
+    Long cost;
 
-    public Ride(String driverName, String source, String destination, String date, String departTime, double cost) {
-        this.driverName = driverName;
-        this.source = source;
-        this.destination = destination;
+    public Ride (String source, String destination, String date, String time, String driverId, Long cost) {
+        this.src = source;
+        this.dest = destination;
         this.date = date;
-        this.time = departTime;
+        this.time = time;
         this.cost = cost;
+        this.driverId = driverId;
     }
 
-    public String getDriverName() {
-        return driverName;
+    public Ride() {
+
     }
 
-    public void setDriverName(String driverName) {
-        this.driverName = driverName;
+    public String getSrc() {
+        return src;
     }
 
-    public String getSource() {
-        return source;
+    public void setSrc(String src) {
+        this.src = src;
     }
 
-    public void setSource(String source) {
-        this.source = source;
+    public String getDest() {
+        return dest;
     }
 
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
+    public void setDest(String dest) {
+        this.dest = dest;
     }
 
     public String getDate() {
@@ -57,11 +53,19 @@ public class Ride {
         this.time = time;
     }
 
+    public String getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(String driverId) {
+        this.driverId = driverId;
+    }
+
     public double getCost() {
         return cost;
     }
 
-    public void setCost(double cost) {
+    public void setCost(Long cost) {
         this.cost = cost;
     }
 }

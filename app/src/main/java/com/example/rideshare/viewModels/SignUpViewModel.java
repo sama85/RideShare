@@ -33,7 +33,6 @@ public class SignUpViewModel extends AndroidViewModel {
                             User user = new User(email, name, phone);
                             repository.insert(user);
                             signUpEmail.postValue(email);
-
                         } else {
                             // If sign in fails, display a message to the user.
 

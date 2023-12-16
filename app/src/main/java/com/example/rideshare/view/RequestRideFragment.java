@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import com.example.rideshare.R;
@@ -63,7 +64,9 @@ public class RequestRideFragment extends Fragment {
             Toast.makeText(getContext(), "Selected time is ${item}", Toast.LENGTH_LONG);
         });
         // TODO: modify navigation of search rides button to send requested ride params in nav action
-        binding.searchBtn.setOnClickListener(view1 -> Navigation.findNavController(view1).navigate(R.id.action_requestRideFragment_to_ridesListFragment));
+        binding.searchBtn.setOnClickListener(view1 -> {
+            Navigation.findNavController(view1).navigate(R.id.action_requestRideFragment_to_ridesListFragment);
+        });
         binding.dateBtn.setOnClickListener(view1 -> datePickerDialog.show());
         binding.ridesBtn.setOnClickListener(view1 -> Navigation.findNavController(view1).navigate(R.id.action_requestRideFragment_to_ridesListFragment));
     }

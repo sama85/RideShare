@@ -27,7 +27,6 @@ public class ProfileViewModel extends AndroidViewModel{
         mAuth = FirebaseAuth.getInstance();
         firebaseUser = mAuth.getCurrentUser();
 
-        Log.i("profile", "email :" + firebaseUser.getEmail());
         user = repository.getUser(firebaseUser.getEmail());
         isEditMode.setValue(false);
     }

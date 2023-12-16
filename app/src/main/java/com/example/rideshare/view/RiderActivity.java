@@ -20,12 +20,7 @@ public class RiderActivity extends AppCompatActivity {
     FirebaseUser user;
     NavHost navHost;
     NavController navController;
-    private static String userEmail;
 
-
-    public static String getUserEmail() {
-        return userEmail;
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +37,6 @@ public class RiderActivity extends AppCompatActivity {
     void checkAuth(){
         if (user == null)
             navigateToSignIn();
-        else userEmail = user.getEmail();
     }
     void navigateToSignIn(){
         Intent intent  = new Intent(RiderActivity.this, SignInActivity.class);

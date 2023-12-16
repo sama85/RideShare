@@ -1,6 +1,7 @@
 package com.example.rideshare.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,8 +40,10 @@ public class RidesListFragment extends Fragment {
         viewModel.getRides().observe(getViewLifecycleOwner(), new Observer<List<Ride>>() {
             @Override
             public void onChanged(List<Ride> rides) {
-                if(rides != null)
+                if(rides != null) {
+                    //Log.i("ride", rides.get(0).getSrc());
                     adapter.updateRides(rides);
+                }
             }
         });
 
