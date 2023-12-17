@@ -46,6 +46,13 @@ public class RidesListFragment extends Fragment {
                 }
             }
         });
+        String src = RidesListFragmentArgs.fromBundle(getArguments()).getSrc();
+//        if(src == null){
+//            viewModel.fetchRides();
+//        }
+//        else{
+//            viewModel.fetchRides("Maadi", "October", null, null);
+//        }
 
     }
 }

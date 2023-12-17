@@ -11,6 +11,22 @@
         <action
             android:id="@+id/action_ridesListFragment_to_rideDetailsFragment"
             app:destination="@id/rideDetailsFragment" />
+        <argument
+            android:name="src"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="dest"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="date"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="time"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/requestRideFragment"

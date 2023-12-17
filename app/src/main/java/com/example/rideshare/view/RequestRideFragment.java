@@ -31,6 +31,10 @@ public class RequestRideFragment extends Fragment {
     private ArrayAdapter<String> itemsAdapter;
     private ArrayAdapter<String> timesAdapter;
     private DatePickerDialog datePickerDialog;
+    private String src;
+    private  String dest;
+    private String date;
+    private String time;
 
     @Nullable
     @Override
@@ -52,23 +56,31 @@ public class RequestRideFragment extends Fragment {
 
         initDatePicker();
         binding.autoCompSource.setOnItemClickListener((adapterView, view1, i, l) -> {
-            String item = adapterView.getItemAtPosition(i).toString();
+            src = adapterView.getItemAtPosition(i).toString();
             Toast.makeText(getContext(), "Selected place is ${item}", Toast.LENGTH_LONG);
         });
         binding.autoCompDest.setOnItemClickListener((adapterView, view1, i, l) -> {
-            String item = adapterView.getItemAtPosition(i).toString();
+            dest = adapterView.getItemAtPosition(i).toString();
             Toast.makeText(getContext(), "Selected place is ${item}", Toast.LENGTH_LONG);
         });
         binding.autoCompTime.setOnItemClickListener((adapterView, view1, i, l) -> {
-            String time = adapterView.getItemAtPosition(i).toString();
+            time = adapterView.getItemAtPosition(i).toString();
             Toast.makeText(getContext(), "Selected time is ${item}", Toast.LENGTH_LONG);
         });
         // TODO: modify navigation of search rides button to send requested ride params in nav action
         binding.searchBtn.setOnClickListener(view1 -> {
-            Navigation.findNavController(view1).navigate(R.id.action_requestRideFragment_to_ridesListFragment);
+            NavDirections action = RequestRideFragmentDirections.actionRequestRideFragmentToRidesListFragment(
+                    "Maadi", "October", date, time
+            );
+            Navigation.findNavController(view1).navigate(action);
         });
         binding.dateBtn.setOnClickListener(view1 -> datePickerDialog.show());
-        binding.ridesBtn.setOnClickListener(view1 -> Navigation.findNavController(view1).navigate(R.id.action_requestRideFragment_to_ridesListFragment));
+        binding.ridesBtn.setOnClickListener(view1 -> {
+
+            Navigation.findNavController(view1).navigate(RequestRideFragmentDirections.actionRequestRideFragmentToRidesListFragment(
+                    null, null, null, null
+            ));
+        });
     }
 
     private String getTodaysDate()

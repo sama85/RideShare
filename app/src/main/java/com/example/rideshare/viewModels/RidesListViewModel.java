@@ -37,7 +37,7 @@ public class RidesListViewModel extends AndroidViewModel{
         rides.getValue().add(new Ride("Mariam Osama", "Ain Shams University, Gate 3","October City", "6-12-2023", "Depart at: 5:30 pm", 350L));
     }
 
-    void fetchRides(){
+    public void fetchRides(){
         ridesRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -45,9 +45,6 @@ public class RidesListViewModel extends AndroidViewModel{
                     List<Ride> ridesList = new ArrayList<>();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         Ride ride = dataSnapshot.getValue(Ride.class);
-                        String src = ride.getSrc();
-                        Log.i("ride", "ride src: " + src);
-                       // ridesList.add(ride);
                         ridesList.add(ride);
                     }
                     rides.setValue(ridesList);
@@ -61,18 +58,18 @@ public class RidesListViewModel extends AndroidViewModel{
         });
     }
 
-    void fetchRidesByRequest(){
+    public void fetchRides(String src, String dest, String date, String time){
 
         // Create a query to find the ride with the desired source value
-        Query query = ridesRef.orderByChild("src_dest").equalTo("Maadi" + "_" + "Ain Shams University Gate 3");
+        Query query = ridesRef.orderByChild("src").equalTo(src);
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    List<Ride> ridesList = rides.getValue();
+                    List<Ride> ridesList = new ArrayList<>();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Ride ride = snapshot.getValue(Ride.class);
-                        if (ride != null) {
+                        if (ride != null && ride.getDest() == dest) {
                             ridesList.add(ride);
                         }
                     }

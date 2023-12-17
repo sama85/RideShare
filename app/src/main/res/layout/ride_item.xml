@@ -5,7 +5,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:padding="10dp"
     android:background="#3EFAC6C6"
     android:layout_marginBottom="20dp">
@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:text="Abasseya Sqauare"
+        android:text="Abasseya "
         android:textSize="@dimen/large_text_size_rv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/from"
@@ -67,7 +67,7 @@
         android:id="@+id/destination"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ain Shams University"
+        android:text="Ain "
         android:textSize="@dimen/large_text_size_rv"
         app:layout_constraintEnd_toEndOf="@+id/source"
         app:layout_constraintStart_toStartOf="@id/source"

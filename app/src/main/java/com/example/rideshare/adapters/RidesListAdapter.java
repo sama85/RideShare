@@ -22,7 +22,7 @@ public class RidesListAdapter extends RecyclerView.Adapter<RidesListAdapter.Ride
     @NonNull
     @Override
     public RideViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        RideItemBinding binding = RideItemBinding.inflate(LayoutInflater.from(parent.getContext()));
+        RideItemBinding binding = RideItemBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false);
         return new RideViewHolder(binding);
     }
 
