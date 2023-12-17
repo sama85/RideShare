@@ -27,7 +27,7 @@ import java.util.Calendar;
 public class RequestRideFragment extends Fragment {
     FragmentRequestRideBinding binding;
     private String[] items = {"Ain Shams University Gate 3", "Ain Shams University Gate 3", "October City", "Maadi", "Nasr City"};
-    private String[] times = {"7:30 AM", "5:30 PM"};
+    private String[] times = {"7:30 am", "5:30 pm"};
     private ArrayAdapter<String> itemsAdapter;
     private ArrayAdapter<String> timesAdapter;
     private DatePickerDialog datePickerDialog;
@@ -57,26 +57,25 @@ public class RequestRideFragment extends Fragment {
         initDatePicker();
         binding.autoCompSource.setOnItemClickListener((adapterView, view1, i, l) -> {
             src = adapterView.getItemAtPosition(i).toString();
-            Toast.makeText(getContext(), "Selected place is ${item}", Toast.LENGTH_LONG);
         });
         binding.autoCompDest.setOnItemClickListener((adapterView, view1, i, l) -> {
             dest = adapterView.getItemAtPosition(i).toString();
-            Toast.makeText(getContext(), "Selected place is ${item}", Toast.LENGTH_LONG);
         });
         binding.autoCompTime.setOnItemClickListener((adapterView, view1, i, l) -> {
             time = adapterView.getItemAtPosition(i).toString();
-            Toast.makeText(getContext(), "Selected time is ${item}", Toast.LENGTH_LONG);
         });
         // TODO: modify navigation of search rides button to send requested ride params in nav action
         binding.searchBtn.setOnClickListener(view1 -> {
-            NavDirections action = RequestRideFragmentDirections.actionRequestRideFragmentToRidesListFragment(
-                    "Maadi", "October", date, time
-            );
-            Navigation.findNavController(view1).navigate(action);
+            if(src.isEmpty() || dest.isEmpty() || date.isEmpty() || time.isEmpty())
+                Toast.makeText(requireActivity(), "Please enter all fields", Toast.LENGTH_LONG);
+            else {
+                NavDirections action = RequestRideFragmentDirections.actionRequestRideFragmentToRidesListFragment(
+                        src, dest, date, time);
+                Navigation.findNavController(view1).navigate(action);
+            }
         });
         binding.dateBtn.setOnClickListener(view1 -> datePickerDialog.show());
         binding.ridesBtn.setOnClickListener(view1 -> {
-
             Navigation.findNavController(view1).navigate(RequestRideFragmentDirections.actionRequestRideFragmentToRidesListFragment(
                     null, null, null, null
             ));
@@ -101,8 +100,9 @@ public class RequestRideFragment extends Fragment {
             public void onDateSet(DatePicker datePicker, int year, int month, int day)
             {
                 month = month + 1;
-                String date = makeDateString(day, month, year);
+                date = makeDateString(day, month, year);
                 binding.dateBtn.setText(date);
+
             }
         };
 
@@ -117,7 +117,7 @@ public class RequestRideFragment extends Fragment {
 
     private String makeDateString(int day, int month, int year)
     {
-        return month + " " + day + " " + year;
+        return month + "/" + day + "/" + year;
     }
 
 }

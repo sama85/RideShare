@@ -47,12 +47,16 @@ public class RidesListFragment extends Fragment {
             }
         });
         String src = RidesListFragmentArgs.fromBundle(getArguments()).getSrc();
-//        if(src == null){
-//            viewModel.fetchRides();
-//        }
-//        else{
-//            viewModel.fetchRides("Maadi", "October", null, null);
-//        }
+        if(src == null){
+            viewModel.fetchRides();
+        }
+        else{
+            String dest = RidesListFragmentArgs.fromBundle(getArguments()).getDest();
+            String date = RidesListFragmentArgs.fromBundle(getArguments()).getDate();
+            String time = RidesListFragmentArgs.fromBundle(getArguments()).getTime();
+            Log.i("ride", date);
+            viewModel.fetchRides(src, dest, date, time);
+        }
 
     }
 }

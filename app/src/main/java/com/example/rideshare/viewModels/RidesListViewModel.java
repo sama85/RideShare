@@ -15,20 +15,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class RidesListViewModel extends AndroidViewModel{
     private final MutableLiveData<List<Ride>> rides = new MutableLiveData<>(new ArrayList<>());
     private DatabaseReference ridesRef;
+
     public MutableLiveData<List<Ride>> getRides() {
         return rides;
     }
     public RidesListViewModel(@NonNull Application application) {
         super(application);
         ridesRef = FirebaseDatabase.getInstance("https://rideshareapp-authentication-default-rtdb.europe-west1.firebasedatabase.app/").getReference("rides");
-        fetchRides();
-        //addDummyRides();
     }
 
     private void addDummyRides() {
@@ -45,7 +47,13 @@ public class RidesListViewModel extends AndroidViewModel{
                     List<Ride> ridesList = new ArrayList<>();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         Ride ride = dataSnapshot.getValue(Ride.class);
-                        ridesList.add(ride);
+                        if(ride != null) {
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                            LocalDate todaysDate = LocalDate.parse(getTodaysDate(), formatter);
+                            LocalDate rideDate = LocalDate.parse(ride.getDate(), formatter);
+                            if(rideDate.isAfter(todaysDate) || rideDate.equals(todaysDate))
+                                ridesList.add(ride);
+                        }
                     }
                     rides.setValue(ridesList);
                 }
@@ -69,7 +77,10 @@ public class RidesListViewModel extends AndroidViewModel{
                     List<Ride> ridesList = new ArrayList<>();
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Ride ride = snapshot.getValue(Ride.class);
-                        if (ride != null && ride.getDest() == dest) {
+                        if (ride != null  && ride.getDest().equals(dest)
+                                && ride.getDate().equals(date)  && ride.getTime().equals(time)
+                        ) {
+                            Log.i("ride", "src: " + ride.getSrc());
                             ridesList.add(ride);
                         }
                     }
@@ -86,6 +97,19 @@ public class RidesListViewModel extends AndroidViewModel{
             }
         });
 
+    }
+    private String getTodaysDate()
+    {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month = month + 1;
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        return makeDateString(day, month, year);
+    }
+    private String makeDateString(int day, int month, int year)
+    {
+        return month + "/" + day + "/" + year;
     }
 
 }
