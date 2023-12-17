@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 
 import com.example.rideshare.R;
 import com.example.rideshare.adapters.RidesListAdapter;
@@ -36,6 +38,15 @@ public class RidesListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this).get(RidesListViewModel.class);
         RidesListAdapter adapter = new RidesListAdapter();
+        RidesListAdapter.OnItemClickListener rideListener = new RidesListAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Ride ride) {
+                // navigate to ride details page
+                NavDirections action = RidesListFragmentDirections.actionRidesListFragmentToRideDetailsFragment(ride);
+                Navigation.findNavController(view).navigate(action);
+            }
+        };
+        adapter.setOnItemClickListener(rideListener);
         binding.ridesList.setAdapter(adapter);
         viewModel.getRides().observe(getViewLifecycleOwner(), new Observer<List<Ride>>() {
             @Override

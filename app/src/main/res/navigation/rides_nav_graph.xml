@@ -39,7 +39,11 @@
     <fragment
         android:id="@+id/rideDetailsFragment"
         android:name="com.example.rideshare.view.RideDetailsFragment"
-        android:label="RideDetailsFragment" />
+        android:label="RideDetailsFragment" >
+        <argument
+            android:name="ride"
+            app:argType="com.example.rideshare.models.Ride" />
+    </fragment>
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.rideshare.view.profileFragment"

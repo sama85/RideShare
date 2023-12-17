@@ -16,8 +16,9 @@ import com.example.rideshare.models.Ride;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RidesListAdapter extends RecyclerView.Adapter<RidesListAdapter.RideViewHolder>{
+public class RidesListAdapter extends RecyclerView.Adapter<RidesListAdapter.RideViewHolder> {
     List<Ride> rides;
+    OnItemClickListener listener;
 
     @NonNull
     @Override
@@ -37,27 +38,40 @@ public class RidesListAdapter extends RecyclerView.Adapter<RidesListAdapter.Ride
         return rides.size();
     }
 
-    public void updateRides(List<Ride> rides){
+    public void updateRides(List<Ride> rides) {
         this.rides = rides;
         Log.i("ride", "update ride called");
         // to redraw recycler view
         notifyDataSetChanged();
     }
 
-    public class RideViewHolder extends RecyclerView.ViewHolder{
+    public class RideViewHolder extends RecyclerView.ViewHolder {
         RideItemBinding binding;
+
         public RideViewHolder(RideItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
-        public void bind(Ride rideItem){
+
+        public void bind(Ride rideItem) {
             binding.driverName.setText("dummy name");
             binding.source.setText(rideItem.getSrc());
             binding.destination.setText(rideItem.getDest());
             binding.date.setText(rideItem.getDate());
             binding.time.setText(rideItem.getTime());
             binding.costValue.setText(String.valueOf(rideItem.getCost()));
+            binding.bookBtn.setOnClickListener(view -> {
+                if(listener != null)
+                    listener.onItemClick(rideItem);
+            });
         }
+
+    }
+    public interface OnItemClickListener{
+        void onItemClick(Ride ride);
+    }
+    public void setOnItemClickListener(OnItemClickListener listener){
+        this.listener = listener;
     }
 }
 

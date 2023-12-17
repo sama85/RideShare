@@ -48,7 +48,7 @@ public class RidesListViewModel extends AndroidViewModel{
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         Ride ride = dataSnapshot.getValue(Ride.class);
                         if(ride != null) {
-                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
                             LocalDate todaysDate = LocalDate.parse(getTodaysDate(), formatter);
                             LocalDate rideDate = LocalDate.parse(ride.getDate(), formatter);
                             if(rideDate.isAfter(todaysDate) || rideDate.equals(todaysDate))

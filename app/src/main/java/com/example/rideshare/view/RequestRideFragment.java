@@ -64,7 +64,6 @@ public class RequestRideFragment extends Fragment {
         binding.autoCompTime.setOnItemClickListener((adapterView, view1, i, l) -> {
             time = adapterView.getItemAtPosition(i).toString();
         });
-        // TODO: modify navigation of search rides button to send requested ride params in nav action
         binding.searchBtn.setOnClickListener(view1 -> {
             if(src.isEmpty() || dest.isEmpty() || date.isEmpty() || time.isEmpty())
                 Toast.makeText(requireActivity(), "Please enter all fields", Toast.LENGTH_LONG);

@@ -1,12 +1,22 @@
 package com.example.rideshare.models;
 
-public class Ride {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Ride implements Parcelable {
     String src;
     String dest;
     String date;
     String time;
     String driverId;
+    String driverName;
+    String driverPhone;
+    String carModel;
     Long cost;
+    Integer capacity;
+
 
     public Ride (String source, String destination, String date, String time, String driverId, Long cost) {
         this.src = source;
@@ -19,6 +29,39 @@ public class Ride {
 
     public Ride() {
 
+    }
+
+    protected Ride(Parcel in) {
+        src = in.readString();
+        dest = in.readString();
+        date = in.readString();
+        time = in.readString();
+        driverId = in.readString();
+        driverName = in.readString();
+        driverPhone = in.readString();
+        carModel = in.readString();
+        cost = in.readLong();
+        capacity = in.readInt();
+    }
+
+    public static final Creator<Ride> CREATOR = new Creator<Ride>() {
+        @Override
+        public Ride createFromParcel(Parcel in) {
+            return new Ride(in);
+        }
+
+        @Override
+        public Ride[] newArray(int size) {
+            return new Ride[size];
+        }
+    };
+
+    public Integer getCapacity() {
+        return capacity;
+    }
+
+    public void setCapacity(Integer capacity) {
+        this.capacity = capacity;
     }
 
     public String getSrc() {
@@ -67,5 +110,48 @@ public class Ride {
 
     public void setCost(Long cost) {
         this.cost = cost;
+    }
+
+    public String getDriverName() {
+        return driverName;
+    }
+
+    public void setDriverName(String driverName) {
+        this.driverName = driverName;
+    }
+
+    public String getDriverPhone() {
+        return driverPhone;
+    }
+
+    public void setDriverPhone(String driverPhone) {
+        this.driverPhone = driverPhone;
+    }
+
+    public String getCarModel() {
+        return carModel;
+    }
+
+    public void setCarModel(String carModel) {
+        this.carModel = carModel;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int i) {
+        dest.writeString(src);
+        dest.writeString(this.dest);
+        dest.writeString(date);
+        dest.writeString(time);
+        dest.writeString(driverId);
+        dest.writeString(driverName);
+        dest.writeString(driverPhone);
+        dest.writeString(carModel);
+        dest.writeLong(cost);
+        dest.writeInt(capacity);
     }
 }
