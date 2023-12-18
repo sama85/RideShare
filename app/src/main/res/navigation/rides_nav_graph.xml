@@ -43,6 +43,9 @@
         <argument
             android:name="ride"
             app:argType="com.example.rideshare.models.Ride" />
+        <action
+            android:id="@+id/action_rideDetailsFragment_to_ridesTrackingFragment"
+            app:destination="@id/ridesTrackingFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

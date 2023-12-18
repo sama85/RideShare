@@ -9,7 +9,6 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rideshare.R;
-import com.example.rideshare.databinding.RideItemBinding;
 import com.example.rideshare.databinding.RideTrackingItemBinding;
 import com.example.rideshare.models.Ride;
 
@@ -60,7 +59,7 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
             binding.costValue.setText(String.valueOf(rideItem.getCost()));
             binding.driverPhoneValue.setText(rideItem.getDriverPhone());
             binding.statusValue.setText(rideItem.getStatus());
-            binding.carNoValue.setText(rideItem.getCarModel());
+            binding.carNoValue.setText(rideItem.getCarNumber());
             binding.paymentMethodValue.setText(rideItem.getPaymentMethod());
 
             if(rideItem.getStatus() == "confirmed")

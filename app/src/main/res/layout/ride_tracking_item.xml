@@ -47,6 +47,7 @@
         android:layout_height="wrap_content"
         android:text="Abasseya Square"
         android:textSize="@dimen/large_text_size_rv"
+        android:layout_marginStart="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/from"
         app:layout_constraintTop_toTopOf="parent" />

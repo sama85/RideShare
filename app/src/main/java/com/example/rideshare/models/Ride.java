@@ -6,6 +6,7 @@ import android.os.Parcelable;
 import androidx.annotation.NonNull;
 
 public class Ride implements Parcelable {
+    String pushId;
     String src;
     String dest;
     String date;
@@ -13,7 +14,7 @@ public class Ride implements Parcelable {
     String driverId;
     String driverName;
     String driverPhone;
-    String carModel;
+    String carNumber;
     String paymentMethod;
     String status;
     Long cost;
@@ -34,6 +35,7 @@ public class Ride implements Parcelable {
     }
 
     protected Ride(Parcel in) {
+        pushId = in.readString();
         src = in.readString();
         dest = in.readString();
         date = in.readString();
@@ -41,7 +43,7 @@ public class Ride implements Parcelable {
         driverId = in.readString();
         driverName = in.readString();
         driverPhone = in.readString();
-        carModel = in.readString();
+        carNumber = in.readString();
         paymentMethod = in.readString();
         status = in.readString();
         cost = in.readLong();
@@ -139,12 +141,12 @@ public class Ride implements Parcelable {
         this.driverPhone = driverPhone;
     }
 
-    public String getCarModel() {
-        return carModel;
+    public String getCarNumber() {
+        return carNumber;
     }
 
-    public void setCarModel(String carModel) {
-        this.carModel = carModel;
+    public void setCarNumber(String carNumber) {
+        this.carNumber = carNumber;
     }
     public String getStatus() {
         return status;
@@ -153,6 +155,14 @@ public class Ride implements Parcelable {
     public void setStatus(String status) {
         this.status = status;
     }
+    public String getPushId() {
+        return pushId;
+    }
+
+    public void setPushId(String pushId) {
+        this.pushId = pushId;
+    }
+
 
     @Override
     public int describeContents() {
@@ -161,6 +171,7 @@ public class Ride implements Parcelable {
 
     @Override
     public void writeToParcel(@NonNull Parcel dest, int i) {
+        dest.writeString(pushId);
         dest.writeString(src);
         dest.writeString(this.dest);
         dest.writeString(date);
@@ -168,7 +179,7 @@ public class Ride implements Parcelable {
         dest.writeString(driverId);
         dest.writeString(driverName);
         dest.writeString(driverPhone);
-        dest.writeString(carModel);
+        dest.writeString(carNumber);
         dest.writeString(paymentMethod);
         dest.writeString(status);
         dest.writeLong(cost);

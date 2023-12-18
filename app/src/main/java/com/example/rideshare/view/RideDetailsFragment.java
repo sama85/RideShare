@@ -11,14 +11,18 @@ import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.Navigation;
 
 import com.example.rideshare.R;
 import com.example.rideshare.databinding.FragmentRideDetailsBinding;
 import com.example.rideshare.models.Ride;
+import com.example.rideshare.viewModels.RideDetailsViewModel;
+import com.example.rideshare.viewModels.RidesListViewModel;
 
 public class RideDetailsFragment extends Fragment {
-
-    FragmentRideDetailsBinding binding;
+    private FragmentRideDetailsBinding binding;
+    private RideDetailsViewModel viewModel;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -30,6 +34,9 @@ public class RideDetailsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(RideDetailsViewModel.class);
+
+        // receive ride from rides list fragment and display it
         Ride ride = RideDetailsFragmentArgs.fromBundle(getArguments()).getRide();
         populateRideDetails(ride);
         binding.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
@@ -46,11 +53,8 @@ public class RideDetailsFragment extends Fragment {
         binding.proceedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                /** add ride to order/request collection (rider id, ride id)
-                 *    STATUSSS?
-                 * */
-
-                // navigate to tracking history
+                viewModel.addOrder(ride);
+                Navigation.findNavController(view).navigate(RideDetailsFragmentDirections.actionRideDetailsFragmentToRidesTrackingFragment());
             }
         });
     }
