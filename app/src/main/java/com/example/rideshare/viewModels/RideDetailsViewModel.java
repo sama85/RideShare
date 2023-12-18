@@ -45,6 +45,7 @@ public class RideDetailsViewModel extends AndroidViewModel {
         ordersRef.child(key).child("userId").setValue(firebaseUser.getUid());
         ordersRef.child(key).child("riderName").setValue(rider.getName());
         ordersRef.child(key).child("status").setValue("pending");
+        ordersRef.child(key).child("driverId").setValue(ride.getDriverId());
         ordersRef.child(key).child("rideId").setValue(ride.getPushId()).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
