@@ -65,7 +65,6 @@ public class RidesListFragment extends Fragment {
             String dest = RidesListFragmentArgs.fromBundle(getArguments()).getDest();
             String date = RidesListFragmentArgs.fromBundle(getArguments()).getDate();
             String time = RidesListFragmentArgs.fromBundle(getArguments()).getTime();
-            Log.i("ride", date);
             viewModel.fetchRides(src, dest, date, time);
         }
 

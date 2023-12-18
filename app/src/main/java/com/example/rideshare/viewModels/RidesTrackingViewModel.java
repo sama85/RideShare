@@ -74,8 +74,6 @@ public class RidesTrackingViewModel extends AndroidViewModel {
     }
 
     public void fetchRides(List<String> ids) {
-
-        for (String id : ids) {
             ridesRef.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -83,9 +81,12 @@ public class RidesTrackingViewModel extends AndroidViewModel {
                         List<Ride> ridesList = new ArrayList<>();
                         for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                             Ride ride = dataSnapshot.getValue(Ride.class);
-                            if (ride != null && dataSnapshot.getKey().equals(id)) {
-                                Log.i("tracking", "ride src: " + ride.getSrc());
-                                ridesList.add(ride);
+                            for(String id : ids) {
+                                //search ride in ids
+                                if (ride != null && dataSnapshot.getKey().equals(id)) {
+                                    Log.i("tracking", "ride src: " + ride.getSrc());
+                                    ridesList.add(ride);
+                                }
                             }
                         }
                         rides.setValue(ridesList);
@@ -98,6 +99,4 @@ public class RidesTrackingViewModel extends AndroidViewModel {
                 }
             });
         }
-    }
-
 }

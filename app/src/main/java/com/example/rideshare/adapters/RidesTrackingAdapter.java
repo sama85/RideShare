@@ -5,8 +5,10 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.rideshare.R;
 import com.example.rideshare.databinding.RideItemBinding;
 import com.example.rideshare.databinding.RideTrackingItemBinding;
 import com.example.rideshare.models.Ride;
@@ -50,12 +52,23 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
         }
 
         public void bind(Ride rideItem) {
-            binding.driverName.setText("dummy name");
+            binding.driverName.setText(rideItem.getDriverName());
             binding.source.setText(rideItem.getSrc());
             binding.destination.setText(rideItem.getDest());
             binding.date.setText(rideItem.getDate());
             binding.time.setText(rideItem.getTime());
             binding.costValue.setText(String.valueOf(rideItem.getCost()));
+            binding.driverPhoneValue.setText(rideItem.getDriverPhone());
+            binding.statusValue.setText(rideItem.getStatus());
+            binding.carNoValue.setText(rideItem.getCarModel());
+            binding.paymentMethodValue.setText(rideItem.getPaymentMethod());
+
+            if(rideItem.getStatus() == "confirmed")
+                binding.statusValue.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.green));
+            else if(rideItem.getStatus() == "declined")
+                binding.statusValue.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.red));
+            else
+                binding.statusValue.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.black));
         }
 
     }
