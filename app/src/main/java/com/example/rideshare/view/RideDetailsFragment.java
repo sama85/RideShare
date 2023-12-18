@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,6 +31,37 @@ public class RideDetailsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Ride ride = RideDetailsFragmentArgs.fromBundle(getArguments()).getRide();
-        Log.i("ride", "ride src is " + ride.getSrc());
+        populateRideDetails(ride);
+        binding.radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int id) {
+                RadioButton radioButton = view.findViewById(id);
+                if (radioButton != null) {
+                    String selectedOption = radioButton.getText().toString();
+                    ride.setPaymentMethod(selectedOption);
+                }
+            }
+        });
+
+        binding.proceedBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                /** add ride to order/request collection (rider id, ride id)
+                 *    STATUSSS?
+                 * */
+
+                // navigate to tracking history
+            }
+        });
+    }
+
+    private void populateRideDetails(Ride ride) {
+        binding.driverName.setText(ride.getDriverName());
+        binding.srcValue.setText(ride.getSrc());
+        binding.destValue.setText(ride.getDest());
+        binding.costValue.setText(String.valueOf(ride.getCost()));
+        binding.driverPhoneValue.setText(ride.getDriverPhone());
+        // TODO: handle the car number and display it
+//        binding.vehicleNoValue.setText(ride);
     }
 }

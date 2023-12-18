@@ -18,7 +18,7 @@
         android:contentDescription="logout"/>
 
     <ImageView
-        android:id="@+id/driver_img_trip"
+        android:id="@+id/driver_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"

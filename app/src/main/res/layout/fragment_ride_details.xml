@@ -10,7 +10,7 @@
     <!-- Driver & Trip Details Section -->
 
     <ImageView
-        android:id="@+id/driver_img_trip"
+        android:id="@+id/driver_img"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_gravity="center"
@@ -22,7 +22,7 @@
 
 
     <TextView
-        android:id="@+id/driver_name_trip"
+        android:id="@+id/driver_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -30,13 +30,13 @@
         android:text="Ahmed Samy"
         android:textColor="@android:color/black"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/driver_img_trip"
-        app:layout_constraintStart_toStartOf="@+id/driver_img_trip"
-        app:layout_constraintTop_toBottomOf="@+id/driver_img_trip" />
+        app:layout_constraintEnd_toEndOf="@+id/driver_img"
+        app:layout_constraintStart_toStartOf="@+id/driver_img"
+        app:layout_constraintTop_toBottomOf="@+id/driver_img" />
 
 
     <TextView
-        android:id="@+id/from_trip"
+        android:id="@+id/src"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -47,11 +47,11 @@
         android:textStyle="bold"
         android:layout_marginStart="60dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/driver_name_trip" />
+        app:layout_constraintTop_toBottomOf="@+id/driver_name" />
 
     <!-- Radio Buttons for Payment Methods -->
     <TextView
-        android:id="@+id/source_trip"
+        android:id="@+id/src_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Abasseya square"
@@ -59,11 +59,11 @@
         android:textSize="@dimen/large_text_size"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/from_trip"
-        app:layout_constraintTop_toTopOf="@+id/from_trip" />
+        app:layout_constraintStart_toEndOf="@+id/src"
+        app:layout_constraintTop_toTopOf="@+id/src" />
 
     <TextView
-        android:id="@+id/to_trip"
+        android:id="@+id/dest"
         android:layout_width="31dp"
         android:layout_height="22dp"
         android:layout_marginTop="@dimen/small_margin"
@@ -71,23 +71,23 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/large_text_size"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/from_trip"
-        app:layout_constraintStart_toStartOf="@+id/from_trip"
-        app:layout_constraintTop_toBottomOf="@+id/from_trip" />
+        app:layout_constraintEnd_toEndOf="@+id/src"
+        app:layout_constraintStart_toStartOf="@+id/src"
+        app:layout_constraintTop_toBottomOf="@+id/src" />
 
     <TextView
-        android:id="@+id/destination_trip"
+        android:id="@+id/dest_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Ain Shams University"
         android:textColor="@android:color/black"
         android:textSize="@dimen/large_text_size"
-        app:layout_constraintEnd_toEndOf="@+id/source_trip"
-        app:layout_constraintStart_toStartOf="@+id/source_trip"
-        app:layout_constraintTop_toTopOf="@+id/to_trip" />
+        app:layout_constraintEnd_toEndOf="@+id/src_value"
+        app:layout_constraintStart_toStartOf="@+id/src_value"
+        app:layout_constraintTop_toTopOf="@+id/dest" />
 
     <TextView
-        android:id="@+id/cost_trip"
+        android:id="@+id/cost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/small_margin"
@@ -95,20 +95,20 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/large_text_size"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/to_trip"
-        app:layout_constraintStart_toStartOf="@+id/to_trip"
-        app:layout_constraintTop_toBottomOf="@+id/to_trip" />
+        app:layout_constraintEnd_toEndOf="@+id/dest"
+        app:layout_constraintStart_toStartOf="@+id/dest"
+        app:layout_constraintTop_toBottomOf="@+id/dest" />
 
     <TextView
-        android:id="@+id/cost_value_trip"
+        android:id="@+id/cost_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="200 EGP"
         android:textColor="@android:color/black"
         android:textSize="@dimen/large_text_size"
-        app:layout_constraintEnd_toEndOf="@+id/destination_trip"
-        app:layout_constraintStart_toStartOf="@+id/destination_trip"
-        app:layout_constraintTop_toTopOf="@+id/cost_trip" />
+        app:layout_constraintEnd_toEndOf="@+id/dest_value"
+        app:layout_constraintStart_toStartOf="@+id/dest_value"
+        app:layout_constraintTop_toTopOf="@+id/cost" />
 
     <TextView
         android:id="@+id/vehicle_no"
@@ -119,9 +119,9 @@
         android:textColor="@android:color/black"
         android:textSize="@dimen/large_text_size"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/cost_trip"
-        app:layout_constraintStart_toStartOf="@+id/cost_trip"
-        app:layout_constraintTop_toBottomOf="@+id/cost_trip" />
+        app:layout_constraintEnd_toEndOf="@+id/cost"
+        app:layout_constraintStart_toStartOf="@+id/cost"
+        app:layout_constraintTop_toBottomOf="@+id/cost" />
 
     <TextView
         android:id="@+id/vehicle_no_value"
@@ -130,16 +130,16 @@
         android:text="A12345"
         android:textColor="@android:color/black"
         android:textSize="@dimen/large_text_size"
-        app:layout_constraintEnd_toEndOf="@+id/cost_value_trip"
-        app:layout_constraintStart_toStartOf="@+id/cost_value_trip"
+        app:layout_constraintEnd_toEndOf="@+id/cost_value"
+        app:layout_constraintStart_toStartOf="@+id/cost_value"
         app:layout_constraintTop_toTopOf="@+id/vehicle_no" />
 
     <TextView
-        android:id="@+id/vehicle_model"
+        android:id="@+id/driver_phone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/small_margin"
-        android:text="Vehicle Model: "
+        android:text="Driver Phone: "
         android:textColor="@android:color/black"
         android:textSize="@dimen/large_text_size"
         android:textStyle="bold"
@@ -148,15 +148,15 @@
         app:layout_constraintTop_toBottomOf="@+id/vehicle_no" />
 
     <TextView
-        android:id="@+id/vehicle_model_value"
+        android:id="@+id/driver_phone_value"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BYD - Black"
+        android:text="1234567778"
         android:textColor="@android:color/black"
         android:textSize="@dimen/large_text_size"
         app:layout_constraintEnd_toEndOf="@+id/vehicle_no_value"
         app:layout_constraintStart_toStartOf="@+id/vehicle_no_value"
-        app:layout_constraintTop_toTopOf="@+id/vehicle_model" />
+        app:layout_constraintTop_toTopOf="@+id/driver_phone" />
 
     <TextView
         android:id="@+id/payment_method"
@@ -168,7 +168,7 @@
         android:textSize="@dimen/large_text_size"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vehicle_model" />
+        app:layout_constraintTop_toBottomOf="@+id/driver_phone" />
 
     <!-- Button for Proceeding to Payment -->
 
@@ -196,6 +196,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Cash"
+            android:minHeight="48dp"
             android:textColor="@android:color/black"
             android:textSize="16sp"
             tools:layout_editor_absoluteX="60dp"
@@ -204,7 +205,7 @@
     </RadioGroup>
 
     <Button
-        android:id="@+id/buttonProceedToPayment"
+        android:id="@+id/proceed_btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"

@@ -8,6 +8,6 @@
         android:id="@+id/requestRideFragment"
         android:icon="@drawable/ic_search"/>
     <item android:title="History"
-        android:id="@+id/history_item"
+        android:id="@+id/ridesTrackingFragment"
         android:icon="@drawable/ic_history"/>
 </menu>

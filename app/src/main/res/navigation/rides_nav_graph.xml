@@ -48,4 +48,8 @@
         android:id="@+id/profileFragment"
         android:name="com.example.rideshare.view.profileFragment"
         android:label="profileFragment" />
+    <fragment
+        android:id="@+id/ridesTrackingFragment"
+        android:name="com.example.rideshare.view.RidesTrackingFragment"
+        android:label="RidesTrackingFragment" />
 </navigation>

@@ -5,15 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-<!--    TODO: change to custom app bar with back button for fragment navigation -->
     <TextView
-        android:id="@+id/history"
+        android:id="@+id/offers"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:textStyle="bold"
-        android:text="@string/rides_history"
+        android:text="Rides Tracking"
         android:textColor="@color/white"
         android:textAlignment="center"
         android:background="@color/main"
@@ -22,14 +21,15 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/history_list"
-        android:layout_width="match_parent"
+        android:id="@+id/rides_list"
+        android:layout_width="0dp"
         android:layout_height="0dp"
+        android:clipToPadding="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/history"
+        app:layout_constraintTop_toBottomOf="@id/offers"
         app:layout_constraintBottom_toBottomOf="parent"
         tools:listitem="@layout/ride_tracking_item"/>
 

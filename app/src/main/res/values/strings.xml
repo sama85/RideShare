@@ -19,7 +19,7 @@
     <string name="im_driver">I\'m a Driver</string>
     <string name="im_rider">I\'m a Rider</string>
     <string name="role_text">Hello User, \n Please Select your Role!</string>
-    <string name="cost">cost:</string>
+    <string name="cost">Cost:</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="rides_history">Rides History</string>
