@@ -58,7 +58,8 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
             binding.time.setText(rideItem.getTime());
             binding.costValue.setText(String.valueOf(rideItem.getCost()));
             binding.driverPhoneValue.setText(rideItem.getDriverPhone());
-            binding.statusValue.setText(rideItem.getStatus());
+            // TODO: set status from request
+//            binding.statusValue.setText(rideItem.getStatus());
             binding.carNoValue.setText(rideItem.getCarNumber());
             binding.paymentMethodValue.setText(rideItem.getPaymentMethod());
 

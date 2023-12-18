@@ -11,12 +11,14 @@ import android.widget.RadioGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 
 import com.example.rideshare.R;
 import com.example.rideshare.databinding.FragmentRideDetailsBinding;
 import com.example.rideshare.models.Ride;
+import com.example.rideshare.room.User;
 import com.example.rideshare.viewModels.RideDetailsViewModel;
 import com.example.rideshare.viewModels.RidesListViewModel;
 
@@ -53,8 +55,16 @@ public class RideDetailsFragment extends Fragment {
         binding.proceedBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewModel.addOrder(ride);
-                Navigation.findNavController(view).navigate(RideDetailsFragmentDirections.actionRideDetailsFragmentToRidesTrackingFragment());
+                viewModel.rider.observe(requireActivity(), new Observer<User>() {
+                    @Override
+                    public void onChanged(User user) {
+                        if(user != null) {
+                            viewModel.addOrder(ride, user);
+                            Navigation.findNavController(view).navigate(RideDetailsFragmentDirections.actionRideDetailsFragmentToRidesTrackingFragment());
+                        }
+                    }
+                });
+
             }
         });
     }

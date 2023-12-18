@@ -19,15 +19,13 @@ public class User {
     @NonNull
     private String phone;
 
+
     public User(@NonNull String email, @NonNull String name, @NonNull String phone) {
         this.email = email;
         this.name = name;
         this.phone = phone;
     }
 
-    //    public int getId() {
-//        return id;
-//    }
     @NonNull
     public String getName() {
         return name;
