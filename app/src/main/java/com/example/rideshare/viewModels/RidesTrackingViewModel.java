@@ -29,6 +29,7 @@ public class RidesTrackingViewModel extends AndroidViewModel {
     private MutableLiveData<List<String>> ridesId = new MutableLiveData<>(new ArrayList<>());
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
+    public List<String> status = new ArrayList<>();
 
     public MutableLiveData<List<Ride>> getRides() {
         return rides;
@@ -56,13 +57,18 @@ public class RidesTrackingViewModel extends AndroidViewModel {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     List<String> ids = new ArrayList<>();
+                    List<String> status_list = new ArrayList<>();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         String id = dataSnapshot.child("rideId").getValue(String.class);
+                        String requestStatus = dataSnapshot.child("status").getValue(String.class);
                         if(id != null) {
                             ids.add(id);
+                            status_list.add(requestStatus);
                         }
                     }
+                    status = status_list;
                     ridesId.setValue(ids);
+
                 }
             }
 
@@ -84,7 +90,6 @@ public class RidesTrackingViewModel extends AndroidViewModel {
                             for(String id : ids) {
                                 //search ride in ids
                                 if (ride != null && dataSnapshot.getKey().equals(id)) {
-                                    Log.i("tracking", "ride src: " + ride.getSrc());
                                     ridesList.add(ride);
                                 }
                             }

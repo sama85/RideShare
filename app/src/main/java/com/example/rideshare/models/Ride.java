@@ -17,6 +17,7 @@ public class Ride implements Parcelable {
     String carNumber;
     String paymentMethod;
     String status;
+    String requestStatus;
     Long cost;
     Integer capacity;
 
@@ -46,6 +47,7 @@ public class Ride implements Parcelable {
         carNumber = in.readString();
         paymentMethod = in.readString();
         status = in.readString();
+        requestStatus = in.readString();
         cost = in.readLong();
         capacity = in.readInt();
     }
@@ -162,6 +164,13 @@ public class Ride implements Parcelable {
     public void setPushId(String pushId) {
         this.pushId = pushId;
     }
+    public String getRequestStatus() {
+        return requestStatus;
+    }
+
+    public void setRequestStatus(String requestStatus) {
+        this.requestStatus = requestStatus;
+    }
 
 
     @Override
@@ -182,8 +191,10 @@ public class Ride implements Parcelable {
         dest.writeString(carNumber);
         dest.writeString(paymentMethod);
         dest.writeString(status);
+        dest.writeString(requestStatus);
         dest.writeLong(cost);
         dest.writeInt(capacity);
 
     }
+
 }

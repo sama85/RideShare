@@ -16,6 +16,7 @@ import java.util.List;
 
 public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdapter.RideViewHolder> {
     List<Ride> rides;
+    List<String> status;
 
     @NonNull
     @Override
@@ -27,7 +28,8 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
     @Override
     public void onBindViewHolder(@NonNull RideViewHolder holder, int position) {
         Ride rideItem = rides.get(position);
-        holder.bind(rideItem);
+        String status = this.status.get(position);
+        holder.bind(rideItem, status);
     }
 
     @Override
@@ -35,8 +37,9 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
         return rides.size();
     }
 
-    public void updateRides(List<Ride> rides) {
+    public void updateRides(List<Ride> rides, List<String> status) {
         this.rides = rides;
+        this.status = status;
         Log.i("ride", "update ride called");
         // to redraw recycler view
         notifyDataSetChanged();
@@ -50,7 +53,7 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
             this.binding = binding;
         }
 
-        public void bind(Ride rideItem) {
+        public void bind(Ride rideItem, String status) {
             binding.driverName.setText(rideItem.getDriverName());
             binding.source.setText(rideItem.getSrc());
             binding.destination.setText(rideItem.getDest());
@@ -58,8 +61,7 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
             binding.time.setText(rideItem.getTime());
             binding.costValue.setText(String.valueOf(rideItem.getCost()));
             binding.driverPhoneValue.setText(rideItem.getDriverPhone());
-            // TODO: set status from request
-//            binding.statusValue.setText(rideItem.getStatus());
+            binding.statusValue.setText(status);
             binding.carNoValue.setText(rideItem.getCarNumber());
             binding.paymentMethodValue.setText(rideItem.getPaymentMethod());
 

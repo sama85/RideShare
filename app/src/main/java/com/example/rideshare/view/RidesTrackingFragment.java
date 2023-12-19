@@ -50,7 +50,7 @@ public class RidesTrackingFragment extends Fragment {
             @Override
             public void onChanged(List<Ride> rides) {
                 if(rides != null) {
-                    adapter.updateRides(rides);
+                    adapter.updateRides(rides, viewModel.status);
                 }
             }
         });
