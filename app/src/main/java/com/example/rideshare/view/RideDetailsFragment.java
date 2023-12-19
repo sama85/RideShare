@@ -25,6 +25,7 @@ import com.example.rideshare.viewModels.RidesListViewModel;
 public class RideDetailsFragment extends Fragment {
     private FragmentRideDetailsBinding binding;
     private RideDetailsViewModel viewModel;
+    private String paymentMethod;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class RideDetailsFragment extends Fragment {
                 RadioButton radioButton = view.findViewById(id);
                 if (radioButton != null) {
                     String selectedOption = radioButton.getText().toString();
-                    ride.setPaymentMethod(selectedOption);
+                    paymentMethod = selectedOption;
                 }
             }
         });
@@ -59,7 +60,7 @@ public class RideDetailsFragment extends Fragment {
                     @Override
                     public void onChanged(User user) {
                         if(user != null) {
-                            viewModel.addOrder(ride, user);
+                            viewModel.addOrder(ride, user, paymentMethod);
                             Navigation.findNavController(view).navigate(RideDetailsFragmentDirections.actionRideDetailsFragmentToRidesTrackingFragment());
                         }
                     }

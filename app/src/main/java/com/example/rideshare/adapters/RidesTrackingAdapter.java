@@ -10,13 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.rideshare.R;
 import com.example.rideshare.databinding.RideTrackingItemBinding;
+import com.example.rideshare.models.Order;
 import com.example.rideshare.models.Ride;
 
 import java.util.List;
 
 public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdapter.RideViewHolder> {
     List<Ride> rides;
-    List<String> status;
+    List<Order> orders;
 
     @NonNull
     @Override
@@ -28,8 +29,8 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
     @Override
     public void onBindViewHolder(@NonNull RideViewHolder holder, int position) {
         Ride rideItem = rides.get(position);
-        String status = this.status.get(position);
-        holder.bind(rideItem, status);
+        Order order = this.orders.get(position);
+        holder.bind(rideItem, order);
     }
 
     @Override
@@ -37,9 +38,9 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
         return rides.size();
     }
 
-    public void updateRides(List<Ride> rides, List<String> status) {
+    public void updateRides(List<Ride> rides, List<Order> orders) {
         this.rides = rides;
-        this.status = status;
+        this.orders = orders;
         Log.i("ride", "update ride called");
         // to redraw recycler view
         notifyDataSetChanged();
@@ -53,7 +54,7 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
             this.binding = binding;
         }
 
-        public void bind(Ride rideItem, String status) {
+        public void bind(Ride rideItem, Order order) {
             binding.driverName.setText(rideItem.getDriverName());
             binding.source.setText(rideItem.getSrc());
             binding.destination.setText(rideItem.getDest());
@@ -61,13 +62,13 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
             binding.time.setText(rideItem.getTime());
             binding.costValue.setText(String.valueOf(rideItem.getCost()));
             binding.driverPhoneValue.setText(rideItem.getDriverPhone());
-            binding.statusValue.setText(status);
+            binding.statusValue.setText(order.getStatus());
             binding.carNoValue.setText(rideItem.getCarNumber());
-            binding.paymentMethodValue.setText(rideItem.getPaymentMethod());
+            binding.paymentMethodValue.setText(order.getPaymentMethod());
 
-            if(rideItem.getStatus() == "confirmed")
+            if(order.getStatus().equals("confirmed"))
                 binding.statusValue.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.green));
-            else if(rideItem.getStatus() == "declined")
+            else if(order.getStatus().equals("declined"))
                 binding.statusValue.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.red));
             else
                 binding.statusValue.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.black));

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
+import com.example.rideshare.models.Order;
 import com.example.rideshare.models.Ride;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -17,8 +18,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class RidesTrackingViewModel extends AndroidViewModel {
     private MutableLiveData<List<String>> ridesId = new MutableLiveData<>(new ArrayList<>());
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
-    public List<String> status = new ArrayList<>();
+    public List<Order> orders = new ArrayList<>();
 
     public MutableLiveData<List<Ride>> getRides() {
         return rides;
@@ -57,18 +56,19 @@ public class RidesTrackingViewModel extends AndroidViewModel {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     List<String> ids = new ArrayList<>();
-                    List<String> status_list = new ArrayList<>();
+                    List<Order> orders_list = new ArrayList<>();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         String id = dataSnapshot.child("rideId").getValue(String.class);
                         String requestStatus = dataSnapshot.child("status").getValue(String.class);
+                        String paymentMethod = dataSnapshot.child("paymentMethod").getValue(String.class);
+                        Order order = new Order(paymentMethod, requestStatus);
                         if(id != null) {
                             ids.add(id);
-                            status_list.add(requestStatus);
+                            orders_list.add(order);
                         }
                     }
-                    status = status_list;
+                    orders = orders_list;
                     ridesId.setValue(ids);
-
                 }
             }
 

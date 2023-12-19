@@ -13,10 +13,8 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.rideshare.adapters.RidesTrackingAdapter;
-import com.example.rideshare.databinding.FragmentRidesListBinding;
 import com.example.rideshare.databinding.FragmentRidesTrackingBinding;
 import com.example.rideshare.models.Ride;
-import com.example.rideshare.viewModels.RidesListViewModel;
 import com.example.rideshare.viewModels.RidesTrackingViewModel;
 
 import java.util.List;
@@ -50,7 +48,7 @@ public class RidesTrackingFragment extends Fragment {
             @Override
             public void onChanged(List<Ride> rides) {
                 if(rides != null) {
-                    adapter.updateRides(rides, viewModel.status);
+                    adapter.updateRides(rides, viewModel.orders);
                 }
             }
         });

@@ -35,10 +35,7 @@ public class RideDetailsViewModel extends AndroidViewModel {
         ridesRef = FirebaseDatabase.getInstance("https://rideshareapp-authentication-default-rtdb.europe-west1.firebasedatabase.app/").getReference("rides");
     }
 
-    public void addOrder(Ride ride, User rider) {
-
-        //update ride payment option
-        ridesRef.child(ride.getPushId()).child("paymentMethod").setValue(ride.getPaymentMethod());
+    public void addOrder(Ride ride, User rider, String paymentMethod) {
 
         //add ride to orders with rideId and userId
         String key = ordersRef.push().getKey();
@@ -46,6 +43,7 @@ public class RideDetailsViewModel extends AndroidViewModel {
         ordersRef.child(key).child("riderName").setValue(rider.getName());
         ordersRef.child(key).child("status").setValue("pending");
         ordersRef.child(key).child("driverId").setValue(ride.getDriverId());
+        ordersRef.child(key).child("paymentMethod").setValue(paymentMethod);
         ordersRef.child(key).child("rideId").setValue(ride.getPushId()).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

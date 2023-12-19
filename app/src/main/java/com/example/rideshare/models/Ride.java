@@ -15,7 +15,6 @@ public class Ride implements Parcelable {
     String driverName;
     String driverPhone;
     String carNumber;
-    String paymentMethod;
     String status;
     String requestStatus;
     Long cost;
@@ -45,7 +44,6 @@ public class Ride implements Parcelable {
         driverName = in.readString();
         driverPhone = in.readString();
         carNumber = in.readString();
-        paymentMethod = in.readString();
         status = in.readString();
         requestStatus = in.readString();
         cost = in.readLong();
@@ -102,13 +100,6 @@ public class Ride implements Parcelable {
 
     public void setTime(String time) {
         this.time = time;
-    }
-    public String getPaymentMethod() {
-        return paymentMethod;
-    }
-
-    public void setPaymentMethod(String paymentMethod) {
-        this.paymentMethod = paymentMethod;
     }
 
     public String getDriverId() {
@@ -189,7 +180,6 @@ public class Ride implements Parcelable {
         dest.writeString(driverName);
         dest.writeString(driverPhone);
         dest.writeString(carNumber);
-        dest.writeString(paymentMethod);
         dest.writeString(status);
         dest.writeString(requestStatus);
         dest.writeLong(cost);
