@@ -126,24 +126,28 @@ public class RidesTrackingViewModel extends AndroidViewModel {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
             DateTimeFormatter timeFormatter= DateTimeFormatter.ofPattern("h:mm a");
 
-            LocalDate date2 = LocalDate.parse(ride.getDate(), formatter);
-            LocalTime time2;
+            LocalDate rideDate = LocalDate.parse(ride.getDate(), formatter);
+            LocalTime rideTime = LocalTime.parse(ride.getTime(), timeFormatter);
+            LocalDateTime rideDateTime = LocalDateTime.of(rideDate, rideTime);
+            LocalTime deadlineTime;
 
             LocalDateTime deadlineDateTime;
 
             // Get the current date and time for comparison with request deadline
             LocalDateTime currentDateTime = LocalDateTime.now();
             if(ride.getTime().contains("PM")){
-                time2 = LocalTime.parse("4:30 PM", timeFormatter);
-                deadlineDateTime = LocalDateTime.of(date2, time2);
+                deadlineTime = LocalTime.parse("4:30 PM", timeFormatter);
+                deadlineDateTime = LocalDateTime.of(rideDate, deadlineTime);
             }
             else{
-                time2 = LocalTime.parse("11:30 PM", timeFormatter);
-                deadlineDateTime = LocalDateTime.of(date2, time2);
+                deadlineTime= LocalTime.parse("11:30 PM", timeFormatter);
+                deadlineDateTime = LocalDateTime.of(rideDate, deadlineTime);
             }
-            if(currentDateTime.isAfter(deadlineDateTime)) {
+            if(currentDateTime.isAfter(deadlineDateTime) && currentDateTime.isBefore(rideDateTime))
                 ordersRef.child(order.getPushId()).child("status").setValue("expired");
-            }
+
+            else if(currentDateTime.isAfter(rideDateTime))
+                ordersRef.child(order.getPushId()).child("status").setValue("completed");
         }
     }
 }
