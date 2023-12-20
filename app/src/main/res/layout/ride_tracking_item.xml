@@ -19,6 +19,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/cancel_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/driver_name"
+        android:text="Cancel"
+        android:backgroundTint="@color/main"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="@id/driver_img"
+        app:layout_constraintEnd_toEndOf="@id/driver_img"/>
+
     <TextView
         android:id="@+id/driver_name"
         android:layout_width="wrap_content"

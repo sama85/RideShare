@@ -2,6 +2,7 @@ package com.example.rideshare.adapters;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,8 @@ import java.util.List;
 public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdapter.RideViewHolder> {
     List<Ride> rides;
     List<Order> orders;
+
+    OnTrackingClickListener listener;
 
     @NonNull
     @Override
@@ -62,9 +65,21 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
             binding.time.setText(rideItem.getTime());
             binding.costValue.setText(String.valueOf(rideItem.getCost()));
             binding.driverPhoneValue.setText(rideItem.getDriverPhone());
-            binding.statusValue.setText(order.getStatus());
+            if(rideItem.getStatus().equals("cancelled"))
+                binding.statusValue.setText(rideItem.getStatus());
+            else
+                binding.statusValue.setText(order.getStatus());
             binding.carNoValue.setText(rideItem.getCarNumber());
             binding.paymentMethodValue.setText(order.getPaymentMethod());
+            binding.cancelBtn.setOnClickListener(view ->{
+                if(listener != null)
+                    listener.onItemClick(order);
+            });
+
+            if(order.getStatus().equals("pending") && !rideItem.getStatus().equals("cancelled"))
+                binding.cancelBtn.setVisibility(View.VISIBLE);
+            else
+                binding.cancelBtn.setVisibility(View.GONE);
 
             if(order.getStatus().equals("confirmed"))
                 binding.statusValue.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.green));
@@ -74,5 +89,12 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
                 binding.statusValue.setTextColor(ContextCompat.getColor(binding.getRoot().getContext(), R.color.black));
         }
 
+    }
+
+    public interface OnTrackingClickListener{
+        void onItemClick(Order order);
+    }
+    public void setOnTrackingClickListener(OnTrackingClickListener listener){
+        this.listener = listener;
     }
 }

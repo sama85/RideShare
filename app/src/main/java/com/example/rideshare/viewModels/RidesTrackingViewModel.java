@@ -115,6 +115,12 @@ public class RidesTrackingViewModel extends AndroidViewModel {
             });
         }
 
+
+    public void cancelOrder(Order order){
+        /** rider can only cancel when order is pending from xml cancel btn attribute */
+        ordersRef.child(order.getPushId()).child("status").setValue("cancelled");
+    }
+
     private void checkExpiryTime(Ride ride, Order order) {
         if(order.getStatus().equals("pending")){
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");

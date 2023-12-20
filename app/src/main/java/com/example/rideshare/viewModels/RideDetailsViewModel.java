@@ -57,6 +57,7 @@ public class RideDetailsViewModel extends AndroidViewModel {
         ordersRef.child(key).child("status").setValue("pending");
         ordersRef.child(key).child("driverId").setValue(ride.getDriverId());
         ordersRef.child(key).child("paymentMethod").setValue(paymentMethod);
+        ordersRef.child(key).child("pushId").setValue(key);
         ordersRef.child(key).child("rideId").setValue(ride.getPushId()).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {

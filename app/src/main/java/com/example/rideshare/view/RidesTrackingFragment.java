@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.rideshare.adapters.RidesTrackingAdapter;
 import com.example.rideshare.databinding.FragmentRidesTrackingBinding;
+import com.example.rideshare.models.Order;
 import com.example.rideshare.models.Ride;
 import com.example.rideshare.viewModels.RidesTrackingViewModel;
 
@@ -34,6 +35,13 @@ public class RidesTrackingFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         viewModel = new ViewModelProvider(this).get(RidesTrackingViewModel.class);
         RidesTrackingAdapter adapter = new RidesTrackingAdapter();
+        RidesTrackingAdapter.OnTrackingClickListener listener = new RidesTrackingAdapter.OnTrackingClickListener() {
+            @Override
+            public void onItemClick(Order order) {
+                viewModel.cancelOrder(order);
+            }
+        };
+        adapter.setOnTrackingClickListener(listener);
         binding.ridesTrackingList.setAdapter(adapter);
         viewModel.getRideIds().observe(requireActivity(), new Observer<List<String>>() {
             @Override
