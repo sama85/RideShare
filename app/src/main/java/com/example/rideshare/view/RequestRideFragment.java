@@ -26,8 +26,8 @@ import java.util.Calendar;
 
 public class RequestRideFragment extends Fragment {
     FragmentRequestRideBinding binding;
-    private String[] items = {"Ain Shams University Gate 3", "Ain Shams University Gate 3", "October City", "Maadi", "Nasr City"};
-    private String[] times = {"7:30 am", "5:30 pm"};
+    private String[] items = {"Ain Shams University Gate 3", "Ain Shams University Gate 4", "October City", "Maadi", "Nasr City","Haram", "Fifth Settlement", "Zayed City"};
+    private String[] times = {"7:30 AM", "5:30 PM"};
     private ArrayAdapter<String> itemsAdapter;
     private ArrayAdapter<String> timesAdapter;
     private DatePickerDialog datePickerDialog;
@@ -65,8 +65,9 @@ public class RequestRideFragment extends Fragment {
             time = adapterView.getItemAtPosition(i).toString();
         });
         binding.searchBtn.setOnClickListener(view1 -> {
-            if(src.isEmpty() || dest.isEmpty() || date.isEmpty() || time.isEmpty())
-                Toast.makeText(requireActivity(), "Please enter all fields", Toast.LENGTH_LONG);
+            if(src == null || dest == null || date == null || time == null ||
+                    src.isEmpty() || dest.isEmpty() || date.isEmpty() || time.isEmpty())
+                Toast.makeText(requireActivity(), "Please enter all fields", Toast.LENGTH_LONG).show();
             else {
                 NavDirections action = RequestRideFragmentDirections.actionRequestRideFragmentToRidesListFragment(
                         src, dest, date, time);
@@ -104,7 +105,7 @@ public class RequestRideFragment extends Fragment {
 
             }
         };
-
+        date = getTodaysDate();
         Calendar cal = Calendar.getInstance();
         int year = cal.get(Calendar.YEAR);
         int month = cal.get(Calendar.MONTH);

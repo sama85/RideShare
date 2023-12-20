@@ -65,11 +65,9 @@ public class RidesTrackingViewModel extends AndroidViewModel {
                         String id = dataSnapshot.child("rideId").getValue(String.class);
                         String requestStatus = dataSnapshot.child("status").getValue(String.class);
                         String paymentMethod = dataSnapshot.child("paymentMethod").getValue(String.class);
-                        String date = dataSnapshot.child("date").getValue(String.class);
-                        String time = dataSnapshot.child("time").getValue(String.class);
                         String pushId = dataSnapshot.child("pushId").getValue(String.class);
 
-                        Order order = new Order(paymentMethod, requestStatus, date, time, pushId);
+                        Order order = new Order(paymentMethod, requestStatus, pushId);
                         if(id != null) {
                             ids.add(id);
                             orders_list.add(order);
