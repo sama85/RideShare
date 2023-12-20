@@ -47,7 +47,7 @@ public class RidesListViewModel extends AndroidViewModel{
                     List<Ride> ridesList = new ArrayList<>();
                     for (DataSnapshot dataSnapshot : snapshot.getChildren()){
                         Ride ride = dataSnapshot.getValue(Ride.class);
-                        if(ride != null) {
+                        if(ride != null && ride.getStatus().equals("available")) {
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
                             LocalDate todaysDate = LocalDate.parse(getTodaysDate(), formatter);
                             LocalDate rideDate = LocalDate.parse(ride.getDate(), formatter);
@@ -79,6 +79,7 @@ public class RidesListViewModel extends AndroidViewModel{
                         Ride ride = snapshot.getValue(Ride.class);
                         if (ride != null  && ride.getDest().equals(dest)
                                 && ride.getDate().equals(date)  && ride.getTime().equals(time)
+                                && ride.getStatus().equals("available")
                         ) {
                             Log.i("ride", "src: " + ride.getSrc());
                             ridesList.add(ride);

@@ -8,9 +8,6 @@ import androidx.room.PrimaryKey;
 
 @Entity(tableName = "user")
 public class User {
-//    @PrimaryKey(autoGenerate = true)
-//    @ColumnInfo(name = "id")
-//    private int id;
     @PrimaryKey
     @NonNull
     private String email;
@@ -37,5 +34,13 @@ public class User {
     @NonNull
     public String getPhone() {
         return phone;
+    }
+
+    public void setName(@NonNull String name) {
+        this.name = name;
+    }
+
+    public void setPhone(@NonNull String phone) {
+        this.phone = phone;
     }
 }

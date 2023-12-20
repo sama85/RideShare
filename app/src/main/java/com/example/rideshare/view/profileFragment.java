@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -12,18 +13,13 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.rideshare.R;
 import com.example.rideshare.databinding.FragmentProfileBinding;
-import com.example.rideshare.databinding.FragmentRideDetailsBinding;
 import com.example.rideshare.room.User;
 import com.example.rideshare.viewModels.ProfileViewModel;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class profileFragment extends Fragment {
     private FragmentProfileBinding binding;
     private ProfileViewModel viewModel;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -41,7 +37,7 @@ public class profileFragment extends Fragment {
             @Override
             public void onChanged(User user) {
                 if(user != null)
-                    updateProfileData(user);
+                    displayProfileData(user);
             }
         });
 
@@ -61,7 +57,13 @@ public class profileFragment extends Fragment {
         });
 
         binding.saveBtn.setOnClickListener(v -> {
-            viewModel.handle_save_click();
+            String name, email, phone;
+            name = binding.nameEt.getText().toString();
+            email = binding.emailEt.getText().toString();
+            phone = binding.phone.getText().toString();
+            if(name.isEmpty() || email.isEmpty() || phone.isEmpty())
+                Toast.makeText(requireActivity(), "Please enter all fields", Toast.LENGTH_SHORT).show();
+            else viewModel.handle_save_click(name, email, phone);
         });
 
         // Handle cancel action
@@ -73,6 +75,7 @@ public class profileFragment extends Fragment {
     // Method to toggle between display and edit modes
     private void setEditMode(boolean enabled) {
         if (enabled) {
+            binding.emailEt.setEnabled(false);
             binding.nameEt.setVisibility(View.VISIBLE);
             binding.emailEt.setVisibility(View.VISIBLE);
             binding.phoneEt.setVisibility(View.VISIBLE);
@@ -95,10 +98,14 @@ public class profileFragment extends Fragment {
         }
     }
 
-    private void updateProfileData(User user){
+    private void displayProfileData(User user){
         binding.name.setText(user.getName());
         binding.email.setText(user.getEmail());
         binding.phone.setText(user.getPhone());
+
+        binding.nameEt.setText(user.getName());
+        binding.emailEt.setText(user.getEmail());
+        binding.phoneEt.setText(user.getPhone());
     }
     void navigateToSignIn(){
         Intent intent  = new Intent(getActivity(), SignInActivity.class);
