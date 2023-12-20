@@ -54,10 +54,11 @@ public class RidesListAdapter extends RecyclerView.Adapter<RidesListAdapter.Ride
         }
 
         public void bind(Ride rideItem) {
-            binding.driverName.setText("dummy name");
+            binding.driverName.setText(rideItem.getDriverName());
             binding.source.setText(rideItem.getSrc());
             binding.destination.setText(rideItem.getDest());
             binding.date.setText(rideItem.getDate());
+            binding.capacityValue.setText(String.valueOf(rideItem.getCapacity()));
             binding.time.setText(rideItem.getTime());
             binding.costValue.setText(String.valueOf(rideItem.getCost()));
             binding.bookBtn.setOnClickListener(view -> {

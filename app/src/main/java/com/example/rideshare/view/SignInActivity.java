@@ -39,25 +39,25 @@ public class SignInActivity extends AppCompatActivity {
                 email = binding.email.getText().toString();
                 password = binding.password.getText().toString();
 
-                if (email.isEmpty())
-                    Toast.makeText(SignInActivity.this, "Please enter email!", Toast.LENGTH_SHORT).show();
-                if (password.isEmpty())
-                    Toast.makeText(SignInActivity.this, "Please enter password!", Toast.LENGTH_SHORT).show();
+                if (email.isEmpty() || password.isEmpty())
+                    Toast.makeText(SignInActivity.this, "Please enter all fields!", Toast.LENGTH_SHORT).show();
+                else {
 
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Toast.makeText(SignInActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
-                                    loadMainPage();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Toast.makeText(SignInActivity.this, "Authentication Failed!", Toast.LENGTH_SHORT).show();
+                    mAuth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Toast.makeText(SignInActivity.this, "Login Successful!", Toast.LENGTH_SHORT).show();
+                                        loadMainPage();
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Toast.makeText(SignInActivity.this, "Authentication Failed!", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
     }
