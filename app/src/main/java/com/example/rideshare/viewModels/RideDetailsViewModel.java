@@ -18,6 +18,10 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+
 public class RideDetailsViewModel extends AndroidViewModel {
     private FirebaseAuth mAuth;
     private FirebaseUser firebaseUser;
@@ -37,6 +41,15 @@ public class RideDetailsViewModel extends AndroidViewModel {
 
     public void addOrder(Ride ride, User rider, String paymentMethod) {
 
+        // get current date and time of request
+        LocalDate currentDate = LocalDate.now();
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+        String formattedDate = currentDate.format(dateFormatter);
+
+        LocalTime currentTime = LocalTime.now();
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("h:mm a");
+        String formattedTime = currentTime.format(timeFormatter);
+
         //add ride to orders with rideId and userId
         String key = ordersRef.push().getKey();
         ordersRef.child(key).child("userId").setValue(firebaseUser.getUid());
@@ -50,5 +63,7 @@ public class RideDetailsViewModel extends AndroidViewModel {
                 Toast.makeText(getApplication().getApplicationContext(), "Order created successfully!", Toast.LENGTH_LONG).show();
             }
         });
+        ordersRef.child(key).child("date").setValue(formattedDate);
+        ordersRef.child(key).child("time").setValue(formattedTime);
     }
 }

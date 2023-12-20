@@ -18,6 +18,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,7 +65,11 @@ public class RidesTrackingViewModel extends AndroidViewModel {
                         String id = dataSnapshot.child("rideId").getValue(String.class);
                         String requestStatus = dataSnapshot.child("status").getValue(String.class);
                         String paymentMethod = dataSnapshot.child("paymentMethod").getValue(String.class);
-                        Order order = new Order(paymentMethod, requestStatus);
+                        String date = dataSnapshot.child("date").getValue(String.class);
+                        String time = dataSnapshot.child("time").getValue(String.class);
+                        String pushId = dataSnapshot.child("pushId").getValue(String.class);
+
+                        Order order = new Order(paymentMethod, requestStatus, date, time, pushId);
                         if(id != null) {
                             ids.add(id);
                             orders_list.add(order);
@@ -91,6 +99,10 @@ public class RidesTrackingViewModel extends AndroidViewModel {
                                 //search ride in ids
                                 if (ride != null && dataSnapshot.getKey().equals(id)) {
                                     ridesList.add(ride);
+                                    int idx = ridesId.getValue().indexOf(id);
+                                    Order order = orders.get(idx);
+                                    checkExpiryTime(ride, order);
+
                                 }
                             }
                         }
@@ -104,4 +116,30 @@ public class RidesTrackingViewModel extends AndroidViewModel {
                 }
             });
         }
+
+    private void checkExpiryTime(Ride ride, Order order) {
+        if(order.getStatus().equals("pending")){
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+            DateTimeFormatter timeFormatter= DateTimeFormatter.ofPattern("h:mm a");
+
+            LocalDate date2 = LocalDate.parse(ride.getDate(), formatter);
+            LocalTime time2;
+
+            LocalDateTime deadlineDateTime;
+
+            // Get the current date and time for comparison with request deadline
+            LocalDateTime currentDateTime = LocalDateTime.now();
+            if(ride.getTime().contains("PM")){
+                time2 = LocalTime.parse("4:30 PM", timeFormatter);
+                deadlineDateTime = LocalDateTime.of(date2, time2);
+            }
+            else{
+                time2 = LocalTime.parse("11:30 PM", timeFormatter);
+                deadlineDateTime = LocalDateTime.of(date2, time2);
+            }
+            if(currentDateTime.isAfter(deadlineDateTime)) {
+                ordersRef.child(order.getPushId()).child("status").setValue("expired");
+            }
+        }
+    }
 }
