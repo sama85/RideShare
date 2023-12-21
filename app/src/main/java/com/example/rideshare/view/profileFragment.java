@@ -60,7 +60,7 @@ public class profileFragment extends Fragment {
             String name, email, phone;
             name = binding.nameEt.getText().toString();
             email = binding.emailEt.getText().toString();
-            phone = binding.phone.getText().toString();
+            phone = binding.phoneEt.getText().toString();
             if(name.isEmpty() || email.isEmpty() || phone.isEmpty())
                 Toast.makeText(requireActivity(), "Please enter all fields", Toast.LENGTH_SHORT).show();
             else viewModel.handle_save_click(name, email, phone);
