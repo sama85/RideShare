@@ -16,6 +16,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -51,7 +53,7 @@ public class RidesListViewModel extends AndroidViewModel{
                             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
                             LocalDate todaysDate = LocalDate.parse(getTodaysDate(), formatter);
                             LocalDate rideDate = LocalDate.parse(ride.getDate(), formatter);
-                            if(rideDate.isAfter(todaysDate) || rideDate.equals(todaysDate))
+                            if(!checkExpired(ride))
                                 ridesList.add(ride);
                         }
                     }
@@ -80,6 +82,7 @@ public class RidesListViewModel extends AndroidViewModel{
                         if (ride != null  && ride.getDest().equals(dest)
                                 && ride.getDate().equals(date)  && ride.getTime().equals(time)
                                 && ride.getStatus().equals("available")
+                                && !checkExpired(ride)
                         ) {
                             Log.i("ride", "src: " + ride.getSrc());
                             ridesList.add(ride);
@@ -99,6 +102,33 @@ public class RidesListViewModel extends AndroidViewModel{
         });
 
     }
+
+    private boolean checkExpired(Ride ride) {
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
+        DateTimeFormatter timeFormatter= DateTimeFormatter.ofPattern("h:mm a");
+
+        LocalDate deadlineDate = LocalDate.parse(ride.getDate(), formatter);
+        LocalTime deadlineTime;
+
+        LocalDateTime deadlineDateTime;
+
+        // Get the current date and time for comparison with request deadline
+        LocalDateTime currentDateTime = LocalDateTime.now();
+        if(ride.getTime().contains("PM")){
+            deadlineTime = LocalTime.parse("4:30 PM", timeFormatter);
+            deadlineDateTime = LocalDateTime.of(deadlineDate, deadlineTime);
+        }
+        else{
+            deadlineTime = LocalTime.parse("11:30 PM", timeFormatter);
+            deadlineDateTime = LocalDateTime.of(deadlineDate.minusDays(1), deadlineTime);
+        }
+        if(currentDateTime.isAfter(deadlineDateTime))
+            return true;
+
+        else return false;
+    }
+
     private String getTodaysDate()
     {
         Calendar cal = Calendar.getInstance();

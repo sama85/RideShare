@@ -122,7 +122,7 @@ public class RidesTrackingViewModel extends AndroidViewModel {
     }
 
     private void checkExpiryTime(Ride ride, Order order) {
-        if(order.getStatus().equals("pending")){
+        if(order.getStatus().equals("pending") || order.getStatus().equals("confirmed")){
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("M/d/yyyy");
             DateTimeFormatter timeFormatter= DateTimeFormatter.ofPattern("h:mm a");
 
@@ -135,17 +135,17 @@ public class RidesTrackingViewModel extends AndroidViewModel {
 
             // Get the current date and time for comparison with request deadline
             LocalDateTime currentDateTime = LocalDateTime.now();
-            if(ride.getTime().contains("PM")){
-                deadlineTime = LocalTime.parse("4:30 PM", timeFormatter);
-                deadlineDateTime = LocalDateTime.of(rideDate, deadlineTime);
+            if(order.getStatus().equals("pending")) {
+                if (ride.getTime().contains("PM")) {
+                    deadlineTime = LocalTime.parse("4:30 PM", timeFormatter);
+                    deadlineDateTime = LocalDateTime.of(rideDate, deadlineTime);
+                } else {
+                    deadlineTime = LocalTime.parse("11:30 PM", timeFormatter);
+                    deadlineDateTime = LocalDateTime.of(rideDate.minusDays(1), deadlineTime);
+                }
+                if (currentDateTime.isAfter(deadlineDateTime) && currentDateTime.isBefore(rideDateTime))
+                    ordersRef.child(order.getPushId()).child("status").setValue("expired");
             }
-            else{
-                deadlineTime= LocalTime.parse("11:30 PM", timeFormatter);
-                deadlineDateTime = LocalDateTime.of(rideDate, deadlineTime);
-            }
-            if(currentDateTime.isAfter(deadlineDateTime) && currentDateTime.isBefore(rideDateTime))
-                ordersRef.child(order.getPushId()).child("status").setValue("expired");
-
             else if(currentDateTime.isAfter(rideDateTime))
                 ordersRef.child(order.getPushId()).child("status").setValue("completed");
         }
