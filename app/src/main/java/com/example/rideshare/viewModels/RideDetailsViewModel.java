@@ -15,8 +15,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -51,20 +55,38 @@ public class RideDetailsViewModel extends AndroidViewModel {
         String formattedTime = currentTime.format(timeFormatter);
 
         //add ride to orders with rideId and userId
-        String key = ordersRef.push().getKey();
-        ordersRef.child(key).child("userId").setValue(firebaseUser.getUid());
-        ordersRef.child(key).child("riderName").setValue(rider.getName());
-        ordersRef.child(key).child("status").setValue("pending");
-        ordersRef.child(key).child("driverId").setValue(ride.getDriverId());
-        ordersRef.child(key).child("paymentMethod").setValue(paymentMethod);
-        ordersRef.child(key).child("pushId").setValue(key);
-        ordersRef.child(key).child("rideId").setValue(ride.getPushId()).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+
+        Query query = ordersRef.orderByChild("rideId").equalTo(ride.getPushId());
+        query.addListenerForSingleValueEvent(new ValueEventListener(){
             @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                Toast.makeText(getApplication().getApplicationContext(), "Order created successfully!", Toast.LENGTH_LONG).show();
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.exists()){
+                    Toast.makeText(getApplication().getApplicationContext(), "Order exists for this ride!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    String key = ordersRef.push().getKey();
+                    ordersRef.child(key).child("userId").setValue(firebaseUser.getUid());
+                    ordersRef.child(key).child("riderName").setValue(rider.getName());
+                    ordersRef.child(key).child("status").setValue("pending");
+                    ordersRef.child(key).child("driverId").setValue(ride.getDriverId());
+                    ordersRef.child(key).child("paymentMethod").setValue(paymentMethod);
+                    ordersRef.child(key).child("pushId").setValue(key);
+                    ordersRef.child(key).child("date").setValue(formattedDate);
+                    ordersRef.child(key).child("time").setValue(formattedTime);
+                    ordersRef.child(key).child("rideId").setValue(ride.getPushId()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            Toast.makeText(getApplication().getApplicationContext(), "Order created Successfully!", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
             }
         });
-        ordersRef.child(key).child("date").setValue(formattedDate);
-        ordersRef.child(key).child("time").setValue(formattedTime);
     }
 }
