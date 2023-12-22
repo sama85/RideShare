@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_rideDetailsFragment_to_ridesTrackingFragment"
             app:destination="@id/ridesTrackingFragment" />
+        <action
+            android:id="@+id/action_rideDetailsFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -55,4 +58,12 @@
         android:id="@+id/ridesTrackingFragment"
         android:name="com.example.rideshare.view.RidesTrackingFragment"
         android:label="RidesTrackingFragment" />
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.example.rideshare.view.PaymentFragment"
+        android:label="PaymentFragment" >
+        <action
+            android:id="@+id/action_paymentFragment_to_ridesTrackingFragment"
+            app:destination="@id/ridesTrackingFragment" />
+    </fragment>
 </navigation>

@@ -61,7 +61,10 @@ public class RideDetailsFragment extends Fragment {
                     public void onChanged(User user) {
                         if(user != null) {
                             viewModel.addOrder(ride, user, paymentMethod);
-                            Navigation.findNavController(view).navigate(RideDetailsFragmentDirections.actionRideDetailsFragmentToRidesTrackingFragment());
+                            if(paymentMethod.equals("Credit Card"))
+                                Navigation.findNavController(view).navigate(RideDetailsFragmentDirections.actionRideDetailsFragmentToPaymentFragment());
+                           else
+                               Navigation.findNavController(view).navigate(RideDetailsFragmentDirections.actionRideDetailsFragmentToRidesTrackingFragment());
                         }
                     }
                 });
@@ -76,7 +79,6 @@ public class RideDetailsFragment extends Fragment {
         binding.destValue.setText(ride.getDest());
         binding.costValue.setText(String.valueOf(ride.getCost()));
         binding.driverPhoneValue.setText(ride.getDriverPhone());
-        // TODO: handle the car number and display it
-//        binding.vehicleNoValue.setText(ride);
+        binding.vehicleNoValue.setText(ride.getCarNumber());
     }
 }
