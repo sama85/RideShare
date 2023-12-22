@@ -14,6 +14,7 @@ import com.example.rideshare.databinding.RideTrackingItemBinding;
 import com.example.rideshare.models.Order;
 import com.example.rideshare.models.Ride;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdapter.RideViewHolder> {
@@ -44,6 +45,10 @@ public class RidesTrackingAdapter extends RecyclerView.Adapter<RidesTrackingAdap
     public void updateRides(List<Ride> rides, List<Order> orders) {
         this.rides = rides;
         this.orders = orders;
+        if(orders.isEmpty())
+            this.rides = new ArrayList<>();
+        if(rides.isEmpty())
+            this.orders = new ArrayList<>();
         Log.i("ride", "update ride called");
         // to redraw recycler view
         notifyDataSetChanged();
