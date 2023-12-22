@@ -35,12 +35,6 @@ public class RidesListViewModel extends AndroidViewModel{
         ridesRef = FirebaseDatabase.getInstance("https://rideshareapp-authentication-default-rtdb.europe-west1.firebasedatabase.app/").getReference("rides");
     }
 
-    private void addDummyRides() {
-        rides.getValue().add(new Ride("Samy Ahmed", "Maadi", "Ain Shams University, Gate 4", "4-12-2023", "Depart at: 7:30 am", 150L));
-        rides.getValue().add(new Ride("Waleed Ahmed", "October City", "Ain Shams University, Gate 3", "3-12-2023", "Depart at: 7:30 am", 300L));
-        rides.getValue().add(new Ride("Mariam Osama", "Ain Shams University, Gate 3","October City", "6-12-2023", "Depart at: 5:30 pm", 350L));
-    }
-
     public void fetchRides(){
         ridesRef.addValueEventListener(new ValueEventListener() {
             @Override
